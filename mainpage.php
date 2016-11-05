@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Wlepka - aplikacja do dzielenia się kodami źródłowymi i plikami tekstowymi</title>
-    <link rel="stylesheet" type="text/css" href="loginpage.css">
+    <link rel="stylesheet" type="text/css" href="mainpage.css">
 </head>
 
 <body>
@@ -16,14 +16,20 @@
 </header>
 
 <main>
-    <div class="row">
-        <div id="column-left" class="col-4-10">
+    <nav>
+        <div class="innertube">
+            <p>left nav panel</p>
+        </div>
+    </nav>
+
+    <div id="content">
+        <div id="column-left" class="column">
             <div class="innertube">
                 <h2>Wlepka - aplikacja do dzielenia się kodami źródłowymi i plikami tekstowymi</h2>
             </div>
         </div>
 
-        <div id="column-center" class="col-3-10">
+        <div id="column-right" class="column">
             <div class="innertube">
                 <h1>Rejestracja</h1>
                 <form>
@@ -39,22 +45,10 @@
                     <input type="submit" value="Wyślij">
                 </form>
             </div>
-        </div>
 
-        <div id="column-right" class="col-3-10">
-            <div class="innertube">
-                <h1>Logowanie</h1>
-                <form>
-                    Login:<br>
-                    <input type="text" name="login" class="input_text"><br>
-                    Haslo:<br>
-                    <input type="password" name="password" class="input_text"><br>
-                    <input type="submit" value="Wyślij">
-                </form>
-            </div>
         </div>
-
     </div>
+
 </main>
 
 <div id="footer">

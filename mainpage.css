@@ -1,0 +1,100 @@
+body{
+    margin:0;
+    padding:0;
+    background:saddlebrown;
+    font-family: Sans-Serif;
+    color: white;
+}
+
+header h1{
+    margin: 0;
+    padding-top:30px;
+}
+
+nav{
+    width: 20%;
+    float: left;
+    background: indianred;
+    min-width: 200px;
+}
+
+#account_control{
+    display: inline-block;
+    position: relative;
+    margin-left: 25%;
+    margin-right: 1%;
+    margin-top:1%;
+    height:75%;
+
+    width: 200px;
+    min-width: 200px;
+    background: orangered;
+    float: right;
+
+}
+
+
+h2{
+    margin:0;
+    padding-top:25px;
+}
+
+#header{
+    background:yellowgreen;
+    height:120px;
+    text-align: center;
+    /*position:relative;*/
+}
+
+main{
+    overflow:hidden;
+    /*width: 80%;*/
+    background: navy;
+    min-width:200px;
+}
+
+#content{
+    height: 750px;
+    position:relative;
+    margin-top:0px
+}
+
+#column-left{
+    background:blue;
+    width:40%;
+    min-width: 400px;
+}
+
+#column-right{
+    background:lightblue;
+    width:60%;
+    min-width: 400px;
+}
+
+.column{
+    float:left;
+    height: 100%;
+    position:relative;
+}
+
+#footer{
+    background:saddlebrown;
+    width:100%;
+    height:80px;
+    position:relative;
+    margin-bottom:0;
+    text-align: center;
+    padding-top:20px;
+}
+
+.input_text{
+    width:40%;
+    height:30px;
+}
+
+
+.innertube{
+    margin:10%;
+    margin-top: 0;
+    display: inline-block;
+}
