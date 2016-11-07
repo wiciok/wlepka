@@ -1,23 +1,37 @@
-/* resets */
+/* reset domyślnych ustawień przeglądarki */
 *,
 *:before,
 *:after {
     box-sizing: border-box;
 }
-.clearfix:after {
+
+/*.clearfix:after {
     content: "";
     display: table;
     clear: both;
+}*/
+
+html{
+    height:100%;
 }
-
-
 
 body{
     margin:0;
     padding:0;
-    background:saddlebrown;
-    font-family: Sans-Serif;
+    background:#3fc142;
+    font-family: 'Advent Pro';
+    font-size: 75%;
     color: white;
+
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#header{
+    background: #329c35;
+    height:120px;
+    text-align: center;
 }
 
 header h1{
@@ -27,94 +41,18 @@ header h1{
     font-size: 3em;
 }
 
-#column-left h2{
-    margin:0;
-    padding-top:25px;
-    font-family: 'Poiret One';
-    font-size: 2em;
-    text-align: center;
-}
-
-.row h1{
-    font-family: 'Comfortaa';
-    font-size: 2em;
-}
-
-#header{
-    background:yellowgreen;
-    height:120px;
-    text-align: center;
-    /*position:relative;*/
-}
-
 main{
     overflow:hidden;
-
-    display: flex;
     min-height: 75vh;
-    flex-direction: column;
-
+    flex: 1 0 auto;
 }
-
-
-#column-left{
-    background-color:blue;
-}
-
-#column-center{
-    background-color:lightblue;
-}
-
-#column-right{
-    background-color: orangered;
-}
-
-
-
-#footer{
-    background:saddlebrown;
-    width:100%;
-    height:80px;
-    bottom: 0;
-    /*position:absolute;*/
-    margin-bottom:0;
-    text-align: center;
-    padding-top:20px;
-
-    flex: none;
-
-    font-family: 'Poiret One';
-    font-size: 1.5em;
-}
-
-.input[type=text]{
-    width:80%;
-}
-
-.row form{
-    font-family: 'Poiret One';
-    font-size: 1.25em;
-}
-
-input[type=submit] {
-    padding:5px 15px;
-    background:#ccc;
-    border:0 none;
-    cursor:pointer;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    font-family: 'Poiret One';
-    font-size: 1em;
-}
-
-
-
 
 .innertube{
     margin:1em;
     margin-top: 0;
     overflow: hidden;
 }
+
 
 /* grid */
 .row {
@@ -124,15 +62,120 @@ input[type=submit] {
     margin-bottom: 10px;
     text-align: center;
 }
+
 .row:last-child {
     margin-bottom: 0;
 }
+
 [class*="col-"] {
     padding: 10px;
     width: 100%;
 }
 
+.row h1{
+    font-family: 'Comfortaa';
+    font-size: 2em;
+}
+
+.row form{
+    font-size: 1.5em;
+}
+
+#main-row{
+    margin-top:0;
+}
+
+input[type=text]{
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+    width: 90%;
+    height: 1.75em;
+    font-size: 1em;
+    font-family: 'Advent Pro';
+    border-radius: 5px;
+    border-width: 0;
+}
+input[type=password]{
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+    width: 90%;
+    height: 1.75em;
+    font-size: 1em;
+    font-family: 'Advent Pro';
+    border-radius: 5px;
+    border-width: 0;
+}
+
+input[type=submit] {
+    width: 90%;
+    padding:5px 15px;
+
+    border:0 none;
+    cursor:pointer;
+    border-radius: 5px;
+    font-size: 0.8em;
+    font-family: 'Advent Pro';
+    color: white;
+}
+
+#login-submit{
+    background: darkred;
+}
+
+#register-submit{
+    background: #5a9f33;
+}
+
+#column-left{
+    background-color: #3fc142;
+}
+
+#column-left h2{
+    margin:0;
+    padding-top:1em;
+    font-size: 2em;
+    text-align: center;
+    font-family: "Poiret One";
+}
+
+#column-center{
+    background-color: #94da4d;
+}
+
+#column-right{
+    background-color: orangered;
+}
+
+footer{
+    overflow: hidden;
+}
+
+#footer{
+    background:#329c35;
+    width:100%;
+    height:120px;
+
+    text-align: center;
+    flex: none;
+    font-family: 'Poiret One';
+    font-size: 1.5em;
+    padding-top: 1em;
+
+}
+
+
 @media all and ( min-width: 750px ) {
+
+    body{
+        font-size: 100%;
+    }
+
+    #main-row{
+        margin-top:5em;
+    }
+
+    [class*="col-"] {
+    }
 
     /* set col widths */
     .col-4-10 {
@@ -152,5 +195,4 @@ input[type=submit] {
     .row{
         text-align: left;
     }
-
 }
