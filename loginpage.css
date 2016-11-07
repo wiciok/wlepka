@@ -10,6 +10,8 @@
     clear: both;
 }
 
+
+
 body{
     margin:0;
     padding:0;
@@ -21,11 +23,21 @@ body{
 header h1{
     margin: 0;
     padding-top:30px;
+    font-family: 'Comfortaa';
+    font-size: 3em;
 }
 
-h2{
+#column-left h2{
     margin:0;
     padding-top:25px;
+    font-family: 'Poiret One';
+    font-size: 2em;
+    text-align: center;
+}
+
+.row h1{
+    font-family: 'Comfortaa';
+    font-size: 2em;
 }
 
 #header{
@@ -70,12 +82,32 @@ main{
     padding-top:20px;
 
     flex: none;
+
+    font-family: 'Poiret One';
+    font-size: 1.5em;
 }
 
-.input_text{
+.input[type=text]{
     width:80%;
-    height:30px;
 }
+
+.row form{
+    font-family: 'Poiret One';
+    font-size: 1.25em;
+}
+
+input[type=submit] {
+    padding:5px 15px;
+    background:#ccc;
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    font-family: 'Poiret One';
+    font-size: 1em;
+}
+
+
 
 
 .innertube{

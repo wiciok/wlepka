@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>Wlepka - aplikacja do dzielenia się kodami źródłowymi i plikami tekstowymi</title>
     <link rel="stylesheet" type="text/css" href="loginpage.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Comfortaa');
+        @import url('https://fonts.googleapis.com/css?family=Poiret+One');
+    </style>
 </head>
 
 <body>
@@ -35,7 +40,7 @@
                     <input type="text" name="login" class="input_text"><br>
                     Haslo:<br>
                     <input type="password" name="password" class="input_text"><br>
-
+                    <br>
                     <input type="submit" value="Wyślij">
                 </form>
             </div>
@@ -49,6 +54,7 @@
                     <input type="text" name="login" class="input_text"><br>
                     Haslo:<br>
                     <input type="password" name="password" class="input_text"><br>
+                    <br>
                     <input type="submit" value="Wyślij">
                 </form>
             </div>
