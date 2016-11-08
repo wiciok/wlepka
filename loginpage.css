@@ -20,9 +20,8 @@ body{
     padding:0;
     background:#3fc142;
     font-family: 'Advent Pro';
-    font-size: 75%;
     color: white;
-
+    font-size: 150%;
     min-height: 100%;
     display: flex;
     flex-direction: column;
@@ -164,7 +163,19 @@ footer{
 }
 
 
-@media all and ( min-width: 750px ) {
+/*todo: zmienic na zaleznosc od zageszczenia pikseli*/
+@media handheld, tv {
+    body{
+        font-size: 150%;
+    }
+
+    [class*="col-"] {
+        width: 100%;
+    }
+}
+
+
+@media only screen and ( min-width: 800px ) {
 
     body{
         font-size: 100%;

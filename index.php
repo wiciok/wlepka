@@ -32,7 +32,7 @@
         <div id="column-center" class="col-3-10">
             <div class="innertube">
                 <h1>Rejestracja</h1>
-                <form>
+                <form method="post">
                     Imię:<br>
                     <input type="text" name="name" class="input_text"><br>
                     Nazwisko:<br>
@@ -50,7 +50,7 @@
         <div id="column-right" class="col-3-10">
             <div class="innertube">
                 <h1>Logowanie</h1>
-                <form>
+                <form method="post">
                     Login:<br>
                     <input type="text" name="login" class="input_text"><br>
                     Hasło:<br>
