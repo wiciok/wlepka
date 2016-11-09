@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Wlepka - aplikacja do dzielenia się kodami źródłowymi i plikami tekstowymi</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
     <link rel="stylesheet" type="text/css" href="loginpage.css">
 
     <style>
@@ -20,6 +21,13 @@
         <h1>Wlepka</h1>
     </div>
 </header>
+
+<div id="JSValidator"> <!--todo: skrypt javascript ustawiajacy display:none -->
+    <h2>
+        JavaScript jest wyłączony!<br>
+        Włącz JS aby umożliwić poprawne działanie witryny!
+    </h2>
+</div>
 
 <main>
     <div class="row" id="main-row">
@@ -71,7 +79,6 @@
         </div>
     </div>
 </footer>
-
 
 
 

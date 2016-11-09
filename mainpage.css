@@ -1,76 +1,3 @@
-/* reset domyślnych ustawień przeglądarki */
-*,
-*:before,
-*:after {
-    box-sizing: border-box;
-}
-
-/*.clearfix:after {
-    content: "";
-    display: table;
-    clear: both;
-}*/
-
-html{
-    height:100%;
-}
-
-body{
-    margin:0;
-    padding:0;
-    background:#3fc142;
-    font-family: 'Advent Pro';
-    color: white;
-    font-size: 150%;
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-#header{
-    background: #329c35;
-    height:120px;
-    text-align: center;
-}
-
-header h1{
-    margin: 0;
-    padding-top:30px;
-    font-family: 'Comfortaa';
-    font-size: 3em;
-}
-
-main{
-    overflow:hidden;
-    min-height: 75vh;
-    flex: 1 0 auto;
-}
-
-.innertube{
-    margin:1em;
-    margin-top: 0;
-    overflow: hidden;
-}
-
-
-/* grid */
-.row {
-    display: flex;
-    flex-flow: row wrap;
-    margin: 0 -10px;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.row:last-child {
-    margin-bottom: 0;
-}
-
-[class*="col-"] {
-    padding: 10px;
-    width: 100%;
-}
-
 .row h1{
     font-family: 'Comfortaa';
     font-size: 2em;
@@ -91,7 +18,7 @@ main{
 
 nav ul{
     list-style-type: none;
-    margin: auto;
+    margin: 0;
     /*padding: 0.5em;*/
     padding: 0;
     font-size: 1.5em;
@@ -101,99 +28,24 @@ nav li{
     padding: 0.2em;
 }
 
-.but-menu-position {
-    margin-left: 0.5em;
-    margin-right: 0.5em;
+
+.div-but-menu-position {
+    margin-left: auto;
     background-color: orangered;
     text-align: center;
     padding: 0.2em;
     border-radius: 5px;
-    width: 100%;
+    width: 95%;
     border-width: 0;
     color: white;
     font-size: 0.8em;
     font-family: 'Advent Pro';
 }
 
-#logout-button{
+#logout-div-but{
     background-color: red;
 }
 
 #column-center{
     background-color: #94da4d;
-}
-
-#column-right{
-    background-color: orangered;
-}
-
-footer{
-    overflow: hidden;
-}
-
-#footer{
-    background:#329c35;
-    width:100%;
-    height:120px;
-
-    text-align: center;
-    flex: none;
-    font-family: 'Poiret One';
-    font-size: 1.5em;
-    padding-top: 1em;
-
-}
-
-
-/*todo: zmienic na zaleznosc od zageszczenia pikseli*/
-@media handheld, tv {
-    body{
-        font-size: 150%;
-    }
-
-    [class*="col-"] {
-        width: 100%;
-    }
-}
-
-
-@media only screen and ( min-width: 800px ) {
-
-    body{
-        font-size: 100%;
-    }
-
-    #main-row{
-        margin-top:0;
-    }
-
-    [class*="col-"] {
-    }
-
-    /* set col widths */
-    .col-4-10 {
-        width: 40%;
-    }
-    .col-6-10 {
-        width: 60%;
-    }
-    .col-3-10 {
-        width: 30%;
-    }
-
-    .col-1-2{
-        width:50%;
-    }
-
-    .col-2-10 {
-        width: 20%;
-    }
-
-    .col-1-10 {
-        width: 10%;
-    }
-
-    .row{
-        text-align: left;
-    }
 }

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Wlepka - aplikacja do dzielenia się kodami źródłowymi i plikami tekstowymi</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
     <link rel="stylesheet" type="text/css" href="mainpage.css">
 
     <style>
@@ -21,49 +22,56 @@
     </div>
 </header>
 
+<div id="JSValidator"> <!--todo: skrypt javascript ustawiajacy display:none -->
+    <h2>
+        JavaScript jest wyłączony!<br>
+        Włącz JS aby umożliwić poprawne działanie witryny!
+    </h2>
+</div>
+
 <main>
     <div class="row" id="main-row">
         <div id="column-left" class="col-2-10">
             <nav>
                 <ul>
                     <li>
-                        <button class="but-menu-position" id="logout-button">
+                        <div class="div-but-menu-position" id="logout-div-but">
                             Uzytkownik: <!-- todo: tu bedzie kod php zwracajacy login -->
                             <br>
                             Wyloguj
-                        </button>
+                        </div>
 
                     </li>
                     <li>
-                        <button class="but-menu-position">
-                            menu1
-                        </button>
+                        <div class="div-but-menu-position">
+                            Twoje pliki
+                        </div>
                     </li>
                     <li>
-                        <button class="but-menu-position">
-                            menu2
-                        </button>
+                        <div class="div-but-menu-position">
+                            Dodaj plik
+                        </div>
                     </li>
                     <li>
-                        <button class="but-menu-position">
-                            menu3
-                        </button>
+                        <div class="div-but-menu-position">
+                            Udostepnione pliki
+                        </div>
+                    </li>
+                    <li>
+                        <div class="div-but-menu-position">
+                            Znajomi
+                        </div>
                     </li>
                 </ul>
             </nav>
         </div>
 
-        <div id="column-center" class="col-6-10">
+        <div id="column-center" class="col-8-10">
             <div class="innertube">
-
+                <h1>kątęnt</h1>
             </div>
         </div>
 
-        <div id="column-right" class="col-2-10">
-            <div class="innertube">
-
-            </div>
-        </div>
 
     </div>
 </main>
@@ -75,7 +83,6 @@
         </div>
     </div>
 </footer>
-
 
 
 
