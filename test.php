@@ -1,7 +1,7 @@
 <?php
 require_once "connection_data.php";
 
-$link=mysqli_connect($database_host,$login,$password,$database_name,$port)
+$link=mysqli_connect($DB_database_host,$DB_login,$DB_password,$DB_database_name,$DB_port)
 or die("blad polaczenia  baza danych".mysqli_connect_error());
 
 ?>
@@ -14,7 +14,7 @@ or die("blad polaczenia  baza danych".mysqli_connect_error());
 <?php
 if(isset($_POST['login']))
 {
-    echo $login;
+    echo $DB_login;
 }
 
 /*mysqli_query($link,"insert into users(login, password, id_country) values('testlog','testpass',1);");
