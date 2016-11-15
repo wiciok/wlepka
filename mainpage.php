@@ -22,11 +22,14 @@
     </div>
 </header>
 
-<div id="JSValidator"> <!--todo: skrypt javascript ustawiajacy display:none -->
+<div id="JSValidator">
     <h2>
         JavaScript jest wyłączony!<br>
         Włącz JS aby umożliwić poprawne działanie witryny!
     </h2>
+    <script>
+        document.getElementById("JSValidator").style.display="none"
+    </script>
 </div>
 
 <main>

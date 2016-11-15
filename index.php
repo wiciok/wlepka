@@ -11,6 +11,15 @@
         @import url('http://fonts.googleapis.com/css?family=Advent+Pro&subset=latin,latin-ext');
         @import url('https://fonts.googleapis.com/css?family=Poiret+One&subset=latin-ext');
     </style>
+
+
+    <?php
+    require_once "connection_data.php";
+
+    $link=mysqli_connect($database_host,$login,$password,$database_name,$port)
+    or die("blad polaczenia z baza danych".mysqli_connect_error());
+
+    ?>
 </head>
 
 <body>
@@ -22,11 +31,14 @@
     </div>
 </header>
 
-<div id="JSValidator"> <!--todo: skrypt javascript ustawiajacy display:none -->
+<div id="JSValidator">
     <h2>
         JavaScript jest wyłączony!<br>
         Włącz JS aby umożliwić poprawne działanie witryny!
     </h2>
+    <script>
+        document.getElementById("JSValidator").style.display="none"
+    </script>
 </div>
 
 <main>
@@ -40,7 +52,7 @@
         <div id="column-center" class="col-3-10">
             <div class="innertube">
                 <h1>Rejestracja</h1>
-                <form method="post">
+                <form method="post" action="registration.php" name="registrationForm">
                     Imię:<br>
                     <input type="text" name="name" class="input_text"><br>
                     Nazwisko:<br>
@@ -58,7 +70,7 @@
         <div id="column-right" class="col-3-10">
             <div class="innertube">
                 <h1>Logowanie</h1>
-                <form method="post">
+                <form method="post" action="login.php" name="loginForm">
                     Login:<br>
                     <input type="text" name="login" class="input_text"><br>
                     Hasło:<br>
