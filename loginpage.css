@@ -52,6 +52,14 @@ input[type=submit] {
     background: #5a9f33;
 }
 
+#login-submit:hover{
+    background: #580000;
+}
+
+#register-submit:hover{
+    background: #3d7829;
+}
+
 #column-left{
     background-color: #3fc142;
 }

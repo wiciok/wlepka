@@ -11,6 +11,8 @@
         @import url('http://fonts.googleapis.com/css?family=Advent+Pro&subset=latin,latin-ext');
         @import url('https://fonts.googleapis.com/css?family=Poiret+One&subset=latin-ext');
     </style>
+
+    <?php require_once "logged_in_check.php"; ?>
 </head>
 
 <body>
@@ -37,33 +39,42 @@
         <div id="column-left" class="col-2-10">
             <nav>
                 <ul>
-                    <li>
-                        <div class="div-but-menu-position" id="logout-div-but">
-                            Uzytkownik: <!-- todo: tu bedzie kod php zwracajacy login -->
-                            <br>
-                            Wyloguj
-                        </div>
-
+                    <li> <!-- todo: dorobic wylogowywanie-->
+                        <a href="logout.php">
+                            <div class="div-but-menu-position" id="logout-div-but">
+                                Uzytkownik:<?php echo $_COOKIE['login']; ?>
+                                <br>
+                                Wyloguj
+                            </div>
+                        </a>
                     </li>
                     <li>
-                        <div class="div-but-menu-position">
-                            Twoje pliki
-                        </div>
+                        <a>
+                            <div class="div-but-menu-position">
+                                Twoje pliki
+                            </div>
+                        </a>
                     </li>
                     <li>
-                        <div class="div-but-menu-position">
-                            Dodaj plik
-                        </div>
+                        <a>
+                            <div class="div-but-menu-position">
+                                Dodaj plik
+                            </div>
+                        </a>
                     </li>
                     <li>
-                        <div class="div-but-menu-position">
-                            Udostepnione pliki
-                        </div>
+                        <a>
+                            <div class="div-but-menu-position">
+                                Udostepnione pliki
+                            </div>
+                        </a>
                     </li>
                     <li>
-                        <div class="div-but-menu-position">
-                            Znajomi
-                        </div>
+                        <a>
+                            <div class="div-but-menu-position">
+                                Znajomi
+                            </div>
+                        </a>
                     </li>
                 </ul>
             </nav>

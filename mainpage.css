@@ -46,6 +46,18 @@ nav li{
     background-color: red;
 }
 
+#logout-div-but:hover{
+    background-color: #CA0000;
+}
+
 #column-center{
     background-color: #94da4d;
+}
+
+a{
+    text-decoration: none;
+}
+
+a .div-but-menu-position:hover{
+    background-color: #CA0000;
 }
