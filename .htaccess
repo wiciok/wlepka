@@ -1,2 +1,9 @@
 php_flag display_errors on
 php_flag html_errors on
+
+<files connection_data.php>
+order allow,deny
+deny from all
+</files>
+
+SetEnv DB_PASS_HASH 1456488529
