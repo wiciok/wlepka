@@ -7,4 +7,6 @@ $DB_database_name="wkaras";
 $DB_port="3306";
 
 
+$SALT='27061416004965837613';
+
 ?>

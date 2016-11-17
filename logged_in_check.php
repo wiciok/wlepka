@@ -5,16 +5,16 @@ require_once "connection_data.php";
 $DB_link=mysqli_connect($DB_database_host,$DB_login,$DB_password,$DB_database_name,$DB_port)
 or die("blad polaczenia z baza danych".mysqli_connect_error());
 
-if (isset($_COOKIE['login']) && isset($_COOKIE['password']))
+if (isset($_COOKIE['login']) && isset($_COOKIE['token']))
 {
     $cookieLogin=mysqli_real_escape_string($DB_link,trim($_COOKIE['login'],"'"));
-    $cookiePassword=$_COOKIE['password'];
+    $cookieToken=$_COOKIE['token'];
 
-    $data = mysqli_query($DB_link,"select login, passw from users where login='$cookieLogin'");
+    $data = mysqli_query($DB_link,"select login, token from users where login='$cookieLogin';");
     $row=mysqli_fetch_assoc($data);
 
 
-    if ($row['passw'] != $cookiePassword)
+    if ($row['token'] != $cookieToken)
     {
         //only for debug //todo: usunac kiedy bedzie potrzeba
         /*echo "debug 1";

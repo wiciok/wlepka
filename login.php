@@ -4,6 +4,9 @@ require_once "connection_data.php";
 $DB_link=mysqli_connect($DB_database_host,$DB_login,$DB_password,$DB_database_name,$DB_port)
 or die("blad polaczenia z baza danych".mysqli_connect_error());
 
+//todo: dorobic dodatkowqa tabele z zapisywaniem informacji o logowaniu uzytkownikow
+//todo: powiazane z koniecznoscia zmiany w module logowania
+
 
 if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password']) && !empty($_POST['password'])))
 {
@@ -13,18 +16,18 @@ if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password'])
     //only for debug: //todo: usunac kiedy bedzie zbedne
     echo "login:".$login."<br>";
     echo "haslo:".$password."<br>";;
-    echo "sha256 z hasla:".hash("sha256",$password)."<br>";;
+    echo "sha256 z hasla + soli:".hash("sha256",$password.$SALT)."<br>";;
 
-
-    //todo: dorobic transakcje albo inne blokowanie tabeli
-    $data = mysqli_query($DB_link,"select login, passw from users where login='$login'");
+    $data = mysqli_query($DB_link,"select login, passw from users where login='$login';");
     $row=mysqli_fetch_assoc($data);
-
-    //todo: mozna dorobic solenie hasel
-    if($row['login']==$login && $row['passw']==hash("sha256",$password))
+    
+    if($row['login']==$login && $row['passw']==hash("sha256",$password.$SALT))
     {
+        $token= hash('sha256',(md5(rand(-10000,10000) . microtime()) . $_SERVER['REMOTE_ADDR']));
+        mysqli_query($DB_link,"UPDATE users SET token='$token' WHERE login='$login'");
+
         setcookie('login', $login, false);
-        setcookie('password', hash('sha256',$password), false);
+        setcookie('token', $token, false);
         header('Location: mainpage.php');
     }
     else
