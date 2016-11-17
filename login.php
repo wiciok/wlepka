@@ -4,9 +4,6 @@ require_once "connection_data.php";
 $DB_link=mysqli_connect($DB_database_host,$DB_login,$DB_password,$DB_database_name,$DB_port)
 or die("blad polaczenia z baza danych".mysqli_connect_error());
 
-//todo: dorobic dodatkowqa tabele z zapisywaniem informacji o logowaniu uzytkownikow
-//todo: powiazane z koniecznoscia zmiany w module logowania
-
 
 if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password']) && !empty($_POST['password'])))
 {
@@ -20,11 +17,12 @@ if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password'])
 
     $data = mysqli_query($DB_link,"select login, passw from users where login='$login';");
     $row=mysqli_fetch_assoc($data);
-    
+
     if($row['login']==$login && $row['passw']==hash("sha256",$password.$SALT))
     {
         $token= hash('sha256',(md5(rand(-10000,10000) . microtime()) . $_SERVER['REMOTE_ADDR']));
-        mysqli_query($DB_link,"UPDATE users SET token='$token' WHERE login='$login'");
+        //mysqli_query($DB_link,"UPDATE users SET token='$token' WHERE login='$login'");
+        mysqli_query($DB_link,"CALL pAddSession('$login','$_SERVER[REMOTE_ADDR]','$token','$_SERVER[HTTP_USER_AGENT]');");
 
         setcookie('login', $login, false);
         setcookie('token', $token, false);

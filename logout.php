@@ -6,7 +6,9 @@ $DB_link=mysqli_connect($DB_database_host,$DB_login,$DB_password,$DB_database_na
 or die("blad polaczenia z baza danych".mysqli_connect_error());
 
 $cookieLogin=mysqli_real_escape_string($DB_link,trim($_COOKIE['login'],"'"));
-mysqli_query($DB_link, "UPDATE users SET token='' WHERE login='$cookieLogin';");
+$cookieToken=mysqli_real_escape_string($DB_link,trim($_COOKIE['token'],"'"));
+//mysqli_query($DB_link, "UPDATE users SET token='' WHERE login='$cookieLogin';");
+mysqli_query($DB_link,"CALL pRemSession('$cookieToken');");
 
 if(isset($_COOKIE['login']))
 {
