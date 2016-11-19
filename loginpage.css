@@ -3,6 +3,34 @@
     font-size: 2em;
 }
 
+.disp-feedback{
+    margin-top: 1em;
+    margin-bottom: 1em;
+    display: none;
+    padding: 1em;
+    width: 100%;
+}
+
+.disp-feedback h3{
+    margin:0;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+#reg-feedback{
+    background-color: #5a9f33;
+}
+
+#login-feedback{
+    background-color: darkred;
+}
+
+#main-row .innertube{
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+
 .row form{
     font-size: 1.5em;
 }
@@ -14,7 +42,7 @@
 input[type=text]{
     margin-top: 0.2em;
     margin-bottom: 0.2em;
-    width: 90%;
+    width: 100%;
     height: 1.75em;
     font-size: 1em;
     font-family: 'Advent Pro';
@@ -24,7 +52,7 @@ input[type=text]{
 input[type=password]{
     margin-top: 0.2em;
     margin-bottom: 0.2em;
-    width: 90%;
+    width: 100%;
     height: 1.75em;
     font-size: 1em;
     font-family: 'Advent Pro';
@@ -33,7 +61,7 @@ input[type=password]{
 }
 
 input[type=submit] {
-    width: 90%;
+    width: 100%;
     padding:5px 15px;
 
     border:0 none;
@@ -71,6 +99,7 @@ input[type=submit] {
     text-align: center;
     font-family: "Poiret One";
 }
+
 
 #column-center{
     background-color: #94da4d;

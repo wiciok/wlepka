@@ -13,8 +13,8 @@
     </style>
 
     <?php
-    require_once "connect_to_db.php";
-    require_once "logged_in_check.php";
+        require_once "connect_to_db.php";
+        require_once "logged_in_check.php";
     ?>
 </head>
 
@@ -48,6 +48,34 @@
         <div id="column-center" class="col-3-10">
             <div class="innertube">
                 <h1>Rejestracja</h1>
+                <div class="disp-feedback" id="reg-feedback">
+                    <h3>
+                        <?php
+                        if(isset($_GET['reg']) && !empty($_GET['reg']))
+                        {
+                            echo
+                            "<script>
+                                document.getElementById('reg-feedback').style.display='inherit'
+                            </script>";
+                            switch(htmlspecialchars($_GET['reg']))
+                            {
+                                case 1:
+                                    echo "Rejestracja wykonana poprawnie."."<br>"."Zaloguj się.";
+                                    break;
+                                case 2:
+                                    echo "Błąd rejestracji."."<br>"."Wybierz inny login.";
+                                    break;
+                                case 3:
+                                    echo "Błąd rejestracji."."<br>"."Wprowadz login i haslo!";
+                                    break;
+                                default:
+                                    echo "Błąd rejestracji.";
+                                    break;
+                            }
+                        }
+                        ?>
+                    </h3>
+                </div>
                 <form method="post" action="registration.php" name="registrationForm">
                     Imię:<br>
                     <input type="text" name="name" class="input_text"><br>
@@ -66,6 +94,30 @@
         <div id="column-right" class="col-3-10">
             <div class="innertube">
                 <h1>Logowanie</h1>
+                <div class="disp-feedback" id="login-feedback">
+                    <h3>
+                        <?php
+                        if(isset($_GET['login']) && !empty($_GET['login']))
+                        {
+                            echo
+                            "<script>
+                                document.getElementById('login-feedback').style.display='inherit'
+                            </script>";
+                            switch(htmlspecialchars($_GET['login']))
+                            {
+                                case 1:
+                                    echo "Błąd logowania."."<br>"."Niepoprawny login i/lub hasło!";
+                                    break;
+                                case 2:
+                                    echo "Błąd logowania."."<br>"."Login i/lub hasło nie wprowadzone!";
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        ?>
+                    </h3>
+                </div>
                 <form method="post" action="login.php" name="loginForm">
                     Login:<br>
                     <input type="text" name="login" class="input_text"><br>

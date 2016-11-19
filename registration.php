@@ -6,6 +6,11 @@ if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password'])
 {
     $login=mysqli_real_escape_string($DB_link,$_POST['login']);
 
+    if(mysqli_query($DB_link,"select login from users where login='$login'"))
+    {
+        header("location: loginpage.php?reg=2"); //login zajęty
+    }
+
     $password=hash("sha256",$_POST['password'].$SALT);
 
     if(isset($_POST['name']) && !empty($_POST['name']))
@@ -22,18 +27,22 @@ if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password'])
 
     if(mysqli_errno($DB_link))
     {
-        echo "mysqli_errno: ".mysqli_errno($DB_link)."<br>";
+        /*echo "mysqli_errno: ".mysqli_errno($DB_link)."<br>";
         echo "mysqli_error: ".mysqli_error($DB_link)."<br>";
-        echo "sql state : ".mysqli_sqlstate($DB_link)."<br>";
+        echo "sql state : ".mysqli_sqlstate($DB_link)."<br>";*/
+        header("location: loginpage.php?reg=99"); //błąd
     }
     else
         //echo "poprawnie utworzono konto";
-        header("location: index.php");
+        header("location: loginpage.php?reg=1");
 
 }
 
+else
+{
+    header("location: loginpage.php?reg=3");
+}
 
 
-//todo: dorobic transakcje albo inne blokowanie tabeli
 
 ?>

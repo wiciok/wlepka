@@ -33,13 +33,13 @@ if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password'])
     else
     {
         //echo "Błędny login i/lub hasło!"; //todo: usunac po zdebugowaniu
-        header('Location: loginpage.php');
+        header('Location: loginpage.php?login=1');
     }
 }
 else
 {
     //echo "Login i/lub hasło nie wprowadzone!"; //todo: usunac po zdebugowaniu
-    header('Location: loginpage.php');
+    header('Location: loginpage.php?login=2');
 }
 
 ?>
