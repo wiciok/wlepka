@@ -7,7 +7,7 @@ definer_user=wkaras
 definer_host=%
 suid=1
 with_check_option=0
-timestamp=2016-11-15 15:40:06
+timestamp=2016-11-19 15:02:11
 create-version=2
 source=select `USERS`.`id_user` AS `id_user`,`USERS`.`login` AS `login`,`USERS`.`passw` AS `passw`,`USERS`.`city` AS `city`,`USERS`.`id_country` AS `id_country`,`USERS`.`birth_date` AS `birth_date`,`USERS`.`user_type` AS `user_type`,`FILES`.`id_file` AS `id_file`,`FILES`.`path` AS `path`,`FILES`.`id_lang` AS `id_lang` from (`USERS` join `FILES` on((`USERS`.`id_user` = `FILES`.`id_user`)))
 client_cs_name=utf8
