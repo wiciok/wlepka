@@ -12,7 +12,8 @@
         @import url('https://fonts.googleapis.com/css?family=Poiret+One&subset=latin-ext');
     </style>
 
-    <?php require_once "logged_in_check.php"; ?>
+    <?php require_once "logged_in_check.php";
+    ?>
 </head>
 
 <body>
@@ -39,7 +40,7 @@
         <div id="column-left" class="col-2-10">
             <nav>
                 <ul>
-                    <li> <!-- todo: dorobic wylogowywanie-->
+                    <li>
                         <a href="logout.php">
                             <div class="div-but-menu-position" id="logout-div-but">
                                 Uzytkownik:<?php echo $_COOKIE['login']; ?>
@@ -76,13 +77,37 @@
                             </div>
                         </a>
                     </li>
+                    <li>
+                        <a href="mainpage.php?page=profileedit">
+                            <div class="div-but-menu-position">
+                                Edytuj profil
+                            </div>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
 
         <div id="column-center" class="col-8-10">
             <div class="innertube">
-                <h1>kątęnt</h1>
+                <?php
+                    if(isset($_GET['page']) && !empty($_GET['page']))
+                    {
+                        switch(htmlspecialchars_decode($_GET['page']))
+                        {
+                            default:
+                                include_once "badpage.php";
+                                break;
+
+                            case "profileedit":
+                                include_once "profileedit.php";
+                                break;
+                        }
+                    }
+                    else
+                        include_once "homepage.php";
+                ?>
+
             </div>
         </div>
 
