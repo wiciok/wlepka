@@ -2,6 +2,11 @@
 
 require_once "connect_to_db.php";
 
+header("Cache-Control: no-store, no-cache, must-revalidate");
+header("Cache-Control: post-check=0, pre-check=0, max-age=0", false);
+header("Pragma: no-cache");
+//todo: zmienic zawartosc cookie na id usera zamiast loginu
+
 if (isset($_COOKIE['login']) && isset($_COOKIE['token']))
 {
     $cookieLogin=mysqli_real_escape_string($DB_link,trim($_COOKIE['login'],"'"));
@@ -26,6 +31,7 @@ if (isset($_COOKIE['login']) && isset($_COOKIE['token']))
             setcookie('token', null, -1);
         }
         header('Location: loginpage.php');
+        exit;
     }
 
     else
@@ -33,6 +39,7 @@ if (isset($_COOKIE['login']) && isset($_COOKIE['token']))
         if (basename($_SERVER['PHP_SELF'])!="mainpage.php")
             //echo "poprawne zalogowanie";
         header('Location: mainpage.php');
+        exit;
     }
 
 
@@ -65,5 +72,6 @@ else
     if (basename($_SERVER['PHP_SELF'])!="loginpage.php")
         //echo "brak cookie";
         header('Location: loginpage.php');
+    exit;
 }
 ?>

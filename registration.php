@@ -1,14 +1,15 @@
 <?php
-//todo: wysyłać komunikaty o poprawnej lub nie rejestracji za pomocą geta
 require_once "connect_to_db.php";
 
 if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password']) && !empty($_POST['password'])))
 {
     $login=mysqli_real_escape_string($DB_link,$_POST['login']);
 
-    if(mysqli_query($DB_link,"select login from users where login='$login'"))
+    $result=mysqli_query($DB_link,"select login from users where login='$login'");
+    if(mysqli_num_rows($result)>0)
     {
         header("location: loginpage.php?reg=2"); //login zajęty
+        exit;
     }
 
     $password=hash("sha256",$_POST['password'].$SALT);
@@ -31,18 +32,18 @@ if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password'])
         echo "mysqli_error: ".mysqli_error($DB_link)."<br>";
         echo "sql state : ".mysqli_sqlstate($DB_link)."<br>";*/
         header("location: loginpage.php?reg=99"); //błąd
+        exit;
     }
     else
+    {
         //echo "poprawnie utworzono konto";
         header("location: loginpage.php?reg=1");
-
+        exit;
+    }
 }
-
 else
 {
     header("location: loginpage.php?reg=3");
+    exit;
 }
-
-
-
 ?>

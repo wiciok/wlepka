@@ -111,7 +111,11 @@
                                 case 2:
                                     echo "Błąd logowania."."<br>"."Login i/lub hasło nie wprowadzone!";
                                     break;
+                                case 3:
+                                    echo "Błąd logowania."."<br>"."Nie można jednoznacznie zidentyfikować użytkownika o wprowadzonym loginie!!";
+                                    break;
                                 default:
+                                    echo "Nieznany blad logowania!";
                                     break;
                             }
                         }
