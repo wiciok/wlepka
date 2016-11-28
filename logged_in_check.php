@@ -5,73 +5,47 @@ require_once "connect_to_db.php";
 header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0, max-age=0", false);
 header("Pragma: no-cache");
-//todo: zmienic zawartosc cookie na id usera zamiast loginu
 
-if (isset($_COOKIE['login']) && isset($_COOKIE['token']))
+if (isset($_COOKIE['id_user']) && isset($_COOKIE['token']))
 {
-    $cookieLogin=mysqli_real_escape_string($DB_link,trim($_COOKIE['login'],"'"));
+    $cookieID_user=mysqli_real_escape_string($DB_link,trim($_COOKIE['id_user'],"'"));
     $cookieToken=mysqli_real_escape_string($DB_link,trim($_COOKIE['token'],"'"));
 
-    //$data = mysqli_query($DB_link,"select login, token from users where login='$cookieLogin';");
-    $data = mysqli_query($DB_link,"select users.login, current_sessions.token from users, current_sessions where current_sessions.id_user=users.id_user and users.login='$cookieLogin';");
-    $row=mysqli_fetch_assoc($data);
+    $data = mysqli_query($DB_link,"select current_sessions.id_user, current_sessions.token from current_sessions where current_sessions.id_user='$cookieID_user' and current_sessions.token='$cookieToken'");
 
-
-    if($cookieToken!=$row['token'])
+    if(mysqli_num_rows($data)!=1)
     {
-        if(isset($_COOKIE['login']))
-        {
-            unset($_COOKIE['login']);
-            setcookie('login', null, -1);
-        }
-
-        if(isset($_COOKIE['token']))
-        {
-            unset($_COOKIE['token']);
-            setcookie('token', null, -1);
-        }
-        header('Location: loginpage.php');
-        exit;
-    }
-
-    else
-    {
-        if (basename($_SERVER['PHP_SELF'])!="mainpage.php")
-            //echo "poprawne zalogowanie";
-        header('Location: mainpage.php');
-        exit;
-    }
-
-
-    /*if ($row['login']!=$cookieLogin || $row['token'] != $cookieToken)
-    {
-        //only for debug //todo: usunac kiedy bedzie potrzeba
-        echo "debug 1"."<br>";
-        echo $cookieLogin."<br>";
-        echo $cookieToken."<br>";
-
-        //if($row['token'] != $cookieToken)
-        //{
-            //usuniecie starej sesji
-       // }
-
-
+        //usuniecie ciastek
+        unset($_COOKIE['id_user']);
+        setcookie('id_user', null, -1);
+        unset($_COOKIE['token']);
+        setcookie('token', null, -1);
+        
         if (basename($_SERVER['PHP_SELF'])!="loginpage.php")
-            echo "loginpage";
-            //header('Location: loginpage.php');
+        {
+            //echo "brak obecnie zalogowanego uzytkownika o danym id i tokenie";
+            header('Location: loginpage.php');
+            exit;
+        }
     }
+
     else
     {
         if (basename($_SERVER['PHP_SELF'])!="mainpage.php")
-            echo "poprawne zalogowanie";
-            //header('Location: mainpage.php');
-    }*/
+        {
+            //echo "poprawne zalogowanie";
+            header('Location: mainpage.php');
+            exit;
+        }
+    }
 }
 else
 {
     if (basename($_SERVER['PHP_SELF'])!="loginpage.php")
+    {
         //echo "brak cookie";
         header('Location: loginpage.php');
-    exit;
+        exit;
+    }
 }
 ?>

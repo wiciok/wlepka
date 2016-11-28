@@ -43,7 +43,23 @@
                     <li>
                         <a href="logout.php">
                             <div class="div-but-menu-position" id="logout-div-but">
-                                Uzytkownik:<?php echo $_COOKIE['login']; ?>
+                                Uzytkownik:
+                                <?php
+
+                                //todo: usunac ta linijke nizej
+                                require_once "connect_to_db.php";
+
+                                if(isset($_COOKIE['id_user']))
+                                {
+                                    $id_user=mysqli_real_escape_string($DB_link,$_COOKIE['id_user']);
+                                    $row=mysqli_fetch_assoc(mysqli_query($DB_link,"select login from users where id_user='$id_user'"));
+                                    echo $row['login'];
+                                }
+                                else //todo: dopracowac to/usunac
+                                {
+                                    echo "powinienes byc wylogowany";
+                                }
+                                ?>
                                 <br>
                                 Wyloguj
                             </div>
