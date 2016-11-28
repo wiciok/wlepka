@@ -20,7 +20,7 @@ if (isset($_COOKIE['id_user']) && isset($_COOKIE['token']))
         setcookie('id_user', null, -1);
         unset($_COOKIE['token']);
         setcookie('token', null, -1);
-        
+
         if (basename($_SERVER['PHP_SELF'])!="loginpage.php")
         {
             //echo "brak obecnie zalogowanego uzytkownika o danym id i tokenie";
