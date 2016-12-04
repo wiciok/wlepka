@@ -18,12 +18,7 @@
 
 <body>
 
-
-<header id="header">
-    <div class="innertube">
-        <h1>Wlepka</h1>
-    </div>
-</header>
+<?php require_once "my_header.php"?>
 
 <div id="JSValidator">
     <h2>

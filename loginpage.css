@@ -101,6 +101,16 @@ input[type=submit] {
     font-family: "Poiret One";
 }
 
+#div-cookie-info{
+    display:none;
+    background: #329c35;
+    text-align: center;
+    padding: 0.2em;
+}
+
+#div-cookie-info b:hover{
+    text-decoration: underline;
+}
 
 #column-center{
     background-color: #94da4d;
@@ -108,4 +118,13 @@ input[type=submit] {
 
 #column-right{
     background-color: orangered;
+}
+
+footer span{
+    font-size: 0.5em;
+    text-align: right;
+}
+
+footer span:hover{
+    text-decoration: underline;
 }

@@ -27,6 +27,14 @@ body{
     flex-direction: column;
 }
 
+h2{
+    font-size: 2em;
+}
+
+h3{
+    font-size: 1.5em;
+}
+
 header{
     background: #329c35;
     height:7.5em;
@@ -38,8 +46,12 @@ header h1{
     padding-top:30px;
     font-family: 'Comfortaa';
     font-size: 3em;
+    color: white;
 }
 
+header a{
+    text-decoration: none;
+}
 
 #JSValidator{
     width: 100%;
@@ -95,11 +107,10 @@ footer{
     font-size: 1.5em;
     padding-top: 1em;
     padding-bottom: 1em;
-
 }
 
-/*todo: zmienic na zaleznosc od zageszczenia pikseli*/
 
+/*todo: zmienic na zaleznosc od zageszczenia pikseli*/
 
 @media only screen and ( min-width: 800px ) {
 

@@ -1,5 +1,1 @@
-<?php
-
-echo "<h1>Wybierz co chcesz zrobić w menu z lewej strony.</h1>";
-
-?>
+<h2>Wybierz co chcesz zrobić w menu po lewej stronie.</h2>
