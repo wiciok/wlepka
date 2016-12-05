@@ -40,7 +40,15 @@ if(isset($_POST['surname']) && !empty($_POST['surname']))
 
 if(isset($_POST['country']) && !empty($_POST['country']))
 {
-    //todo: to trzeba jakoś sensownie rozwiązać
+    $country_name=mysqli_real_escape_string($DB_link,$_POST['country']);
+
+    $data=mysqli_query($DB_link,"SELECT name FROM countries WHERE name='$country_name'");
+    if(mysqli_num_rows($data)==0)
+    {
+        mysqli_query($DB_link,"INSERT INTO countries(name) VALUES('$country_name')");
+    }
+    mysqli_query($DB_link,"UPDATE users SET id_country=(SELECT id_country FROM countries WHERE name='$country_name')");
+
 }
 
 if(isset($_POST['birth_date']) && !empty($_POST['birth_date']))
@@ -59,6 +67,8 @@ if(isset($_POST['city']) && !empty($_POST['city']))
 
 if(mysqli_error($DB_link))
 {
+    //echo mysqli_errno($DB_link);
+    //echo mysqli_error($DB_link);
     header('Location: mainpage.php?page=profileedit&alert=2');
     exit;
 }

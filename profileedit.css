@@ -12,11 +12,19 @@ td{
     background-color: darkred;
 }
 
+.invisible-container{
+    display:none;
+}
+
 h2{
     margin-top: 0.3em;
 }
 
-input[type=text]{
+datalist{
+    display: inherit;
+}
+
+input{
     margin-top: 0.2em;
     margin-bottom: 0.2em;
     width: 100%;
@@ -29,18 +37,6 @@ input[type=text]{
     padding-right: 0.4em;
 }
 
-input[type=password]{
-    margin-top: 0.2em;
-    margin-bottom: 0.2em;
-    width: 100%;
-    height: 1.75em;
-    font-size: 1em;
-    font-family: 'Advent Pro';
-    border-radius: 5px;
-    border-width: 0;
-    padding-left: 0.4em;
-    padding-right: 0.4em;
-}
 
 input[type=submit] {
     width: 100%;

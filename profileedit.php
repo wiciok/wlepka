@@ -63,13 +63,34 @@
                 </tr>
                 <tr>
                     <td>Kraj:</td> <!--todo: TUTAJ ZROBIĆ JAKOŚ KWESTIĘ WYBORU KRAJU Z LISTY -->
+
+                    <div class="invisible-container">
+                        <datalist id="countries">
+                            <?php
+                            require_once "connect_to_db.php";
+
+                            $data=mysqli_query($DB_link,"SELECT name FROM countries");
+                            $num_rows=mysqli_num_rows($data);
+
+                            while($num_rows>0)
+                            {
+                                $row=mysqli_fetch_assoc($data);
+                                echo '<option value='.$row['name'].'>';
+                                $num_rows--;
+                            }
+                            ?>
+                        </datalist>
+                    </div>
+
                     <?php
                     global $logged_id_user;
                     global $logged_user_row;
                     $id_country=$logged_user_row['id_country'];
                     $row=mysqli_fetch_assoc(mysqli_query($DB_link,"select name from countries where countries.id_country='$id_country'"));
                     ?>
-                    <td><input type="text" name="country" placeholder="<?php global $row; echo $row['name'];?>"></td>
+                    <td>
+                        <input list="countries" name="country" placeholder="<?php global $row; echo $row['name'];?>"/>
+                    </td>
                 </tr>
                 <tr>
                     <td>Data urodzenia:</td>
@@ -83,7 +104,7 @@
                 </tr>
                 <tr>
                     <td>Miasto:</td>
-                    <td><input type="text" name="city" placeholder="<?php global $logged_user_row; echo $logged_user_row['city']; ?>"></td>
+                    <td><input type="text" name="city" list="mojalista" placeholder="<?php global $logged_user_row; echo $logged_user_row['city']; ?>"></td>
                 </tr>
                 <tr>
                     <td>
@@ -97,8 +118,6 @@
                     </td>
                 </tr>
                 </tfoot>
-
-
             </table>
         </form>
     </div>
