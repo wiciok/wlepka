@@ -6,7 +6,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0, max-age=0", false);
 header("Pragma: no-cache");
 
-if (isset($_COOKIE['id_user']) && isset($_COOKIE['token']))
+if (isset($_COOKIE['id_user']) && isset($_COOKIE['token']) && isset($_COOKIE['action_token']))
 {
     $cookieID_user=mysqli_real_escape_string($DB_link,trim($_COOKIE['id_user'],"'"));
     $cookieToken=mysqli_real_escape_string($DB_link,trim($_COOKIE['token'],"'"));
@@ -20,6 +20,8 @@ if (isset($_COOKIE['id_user']) && isset($_COOKIE['token']))
         setcookie('id_user', null, -1);
         unset($_COOKIE['token']);
         setcookie('token', null, -1);
+        unset($_COOKIE['action_token']);
+        setcookie('action_token',null,-1);
 
         if (basename($_SERVER['PHP_SELF'])!="loginpage.php")
         {
@@ -28,13 +30,32 @@ if (isset($_COOKIE['id_user']) && isset($_COOKIE['token']))
             exit;
         }
     }
-
-    else
+    else //dane sie zgadzają
     {
-        if (basename($_SERVER['PHP_SELF'])!="mainpage.php")
+        //sprawdzenie action_tokena - zabezpieczenie przed przechwyceniem ciasteczka
+
+        $action_token=mysqli_real_escape_string($DB_link,$_COOKIE['action_token']);
+        $data=mysqli_query($DB_link,"SELECT action_token FROM current_sessions WHERE id_user='$cookieID_user'");
+        $row=mysqli_fetch_assoc($data);
+
+        if($action_token==$row['action_token'])
         {
-            //echo "poprawne zalogowanie";
-            header('Location: mainpage.php');
+            $action_token=hash('sha256',rand(-90000,90000));
+            mysqli_query($DB_link,"UPDATE current_sessions SET action_token='$action_token' WHERE id_user='$cookieID_user'");
+            setcookie('action_token',$action_token,false);
+
+            if (basename($_SERVER['PHP_SELF'])!="mainpage.php")
+            {
+                //echo "poprawne zalogowanie";
+                header('Location: mainpage.php');
+                exit;
+            }
+
+        }
+        else
+        {
+            //echo "przechwycona sesja";
+            header('Location: logout.php');
             exit;
         }
     }

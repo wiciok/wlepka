@@ -16,6 +16,12 @@ if(isset($_COOKIE['token']))
     setcookie('token', null, -1);
 }
 
+if(isset($_COOKIE['token']))
+{
+    unset($_COOKIE['action_token']);
+    setcookie('action_token',null,-1);
+}
+
 header("Location: index.php");
 exit;
 

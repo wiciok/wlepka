@@ -45,11 +45,12 @@ if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password'])
         mysqli_query($DB_link,"CALL pForceRemoveSession('$login');");
 
         $token=hash('sha256',(md5(rand(-10000,10000) . microtime()) . $_SERVER['REMOTE_ADDR']));
-
-        mysqli_query($DB_link,"CALL pAddSession('$login','$_SERVER[REMOTE_ADDR]','$token','$_SERVER[HTTP_USER_AGENT]');");
+        $action_token=hash('sha256',rand(-90000,90000));
+        mysqli_query($DB_link,"CALL pAddSession('$login','$_SERVER[REMOTE_ADDR]','$token','$_SERVER[HTTP_USER_AGENT]','$action_token');");
 
         setcookie('id_user', $id_user, false);
         setcookie('token', $token, false);
+        setcookie('action_token',$action_token,false);
 
         //echo "zalogowano poprawnie"; //todo: usunac po zdebugowaniu
         header('Location: mainpage.php');
