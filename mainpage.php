@@ -48,7 +48,7 @@
                                 {
                                     $id_user=mysqli_real_escape_string($DB_link,$_COOKIE['id_user']);
                                     $row=mysqli_fetch_assoc(mysqli_query($DB_link,"select login from users where id_user='$id_user'"));
-                                    echo $row['login'];
+                                    echo htmlspecialchars($row['login']);
                                 }
                                 else //todo: dopracowac to/usunac
                                 {
@@ -82,7 +82,7 @@
                         </a>
                     </li>
                     <li>
-                        <a>
+                        <a href="mainpage.php?page=friends">
                             <div class="div-but-menu-position">
                                 Znajomi
                             </div>
@@ -112,6 +112,9 @@
 
                             case "profileedit":
                                 include_once "profileedit.php";
+                                break;
+                            case "friends":
+                                include_once "friends.php";
                                 break;
                         }
                     }

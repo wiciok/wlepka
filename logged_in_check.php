@@ -15,20 +15,7 @@ if (isset($_COOKIE['id_user']) && isset($_COOKIE['token']) && isset($_COOKIE['ac
 
     if(mysqli_num_rows($data)!=1)
     {
-        //usuniecie ciastek
-        unset($_COOKIE['id_user']);
-        setcookie('id_user', null, -1);
-        unset($_COOKIE['token']);
-        setcookie('token', null, -1);
-        unset($_COOKIE['action_token']);
-        setcookie('action_token',null,-1);
-
-        if (basename($_SERVER['PHP_SELF'])!="loginpage.php")
-        {
-            //echo "brak obecnie zalogowanego uzytkownika o danym id i tokenie";
-            header('Location: loginpage.php');
-            exit;
-        }
+        header("location: logout.php");
     }
     else //dane sie zgadzają
     {
@@ -50,7 +37,6 @@ if (isset($_COOKIE['id_user']) && isset($_COOKIE['token']) && isset($_COOKIE['ac
                 header('Location: mainpage.php');
                 exit;
             }
-
         }
         else
         {

@@ -45,17 +45,17 @@
                         $logged_id_user=mysqli_real_escape_string($DB_link,$_COOKIE['id_user']);
                         $logged_user_row=mysqli_fetch_assoc(mysqli_query($DB_link,"select * from users where id_user='$logged_id_user'"));
 
-                        echo $logged_user_row['name'];
+                        echo htmlspecialchars($logged_user_row['name']);
                         ?>">
                     </td>
                 </tr>
                 <tr>
                     <td>Nazwisko:</td>
-                    <td><input type="text" name="surname" placeholder="<?php global $logged_user_row; echo $logged_user_row['surname']; ?>"></td>
+                    <td><input type="text" name="surname" placeholder="<?php global $logged_user_row; echo htmlspecialchars($logged_user_row['surname']); ?>"></td>
                 </tr>
                 <tr>
                     <td>Login:</td>
-                    <td><input type="text" name="login" placeholder="<?php global $logged_user_row; echo $logged_user_row['login']; ?>"></td>
+                    <td><input type="text" name="login" placeholder="<?php global $logged_user_row; echo htmlspecialchars($logged_user_row['login']); ?>"></td>
                 </tr>
                 <tr>
                     <td>Hasło:</td>
@@ -75,7 +75,7 @@
                             while($num_rows>0)
                             {
                                 $row=mysqli_fetch_assoc($data);
-                                echo '<option value='.$row['name'].'>';
+                                echo htmlspecialchars('<option value='.$row['name'].'>');
                                 $num_rows--;
                             }
                             ?>
@@ -89,7 +89,7 @@
                     $row=mysqli_fetch_assoc(mysqli_query($DB_link,"select name from countries where countries.id_country='$id_country'"));
                     ?>
                     <td>
-                        <input list="countries" name="country" placeholder="<?php global $row; echo $row['name'];?>"/>
+                        <input list="countries" name="country" placeholder="<?php global $row; echo htmlspecialchars($row['name']);?>"/>
                     </td>
                 </tr>
                 <tr>
@@ -97,14 +97,14 @@
                     <td><input type="text" name="birth_date" placeholder="<?php
                         global $logged_user_row;
                         if(!empty($logged_user_row['birth_date']))
-                            echo $logged_user_row['birth_date'];
+                            echo htmlspecialchars($logged_user_row['birth_date']);
                         else
                             echo "Wpisz datę w formacie YYYY-MM-DD";
                         ?>"></td>
                 </tr>
                 <tr>
                     <td>Miasto:</td>
-                    <td><input type="text" name="city" list="mojalista" placeholder="<?php global $logged_user_row; echo $logged_user_row['city']; ?>"></td>
+                    <td><input type="text" name="city" list="mojalista" placeholder="<?php global $logged_user_row; echo htmlspecialchars($logged_user_row['city']); ?>"></td>
                 </tr>
                 <tr>
                     <td>
