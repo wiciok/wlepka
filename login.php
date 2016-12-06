@@ -8,12 +8,21 @@ if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password'])
     $login=mysqli_real_escape_string($DB_link,$_POST['login']);
     $password=mysqli_real_escape_string($DB_link,$_POST['password']);
 
+
+    $data=mysqli_query($DB_link,"SELECT * FROM error_logs WHERE login='$login'");
+    if(mysqli_num_rows($data)>3)
+    {
+        header('Location: loginpage.php?login=4');
+        exit;
+    }
+
+
     //only for debug: //todo: usunac kiedy bedzie zbedne
     /*echo "login:".$login."<br>";
     echo "haslo:".$password."<br>";;
     echo "sha256 z hasla + soli:".hash("sha256",$password.$SALT)."<br>";*/
 
-    $data = mysqli_query($DB_link,"select login, passw, id_user from users where login='$login'");
+    $data = mysqli_query($DB_link,"select login, passw, id_user, salt from users where login='$login'");
 
     if(mysqli_num_rows($data)!=1)
     {
@@ -23,7 +32,9 @@ if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password'])
     }
     $row=mysqli_fetch_assoc($data);
 
-    if($row['login']==$login && $row['passw']==hash("sha256",$password.$SALT))
+
+
+    if($row['login']==$login && $row['passw']==hash("sha256",$password.$SALT.$row['salt']))
     {
         foreach ($_SERVER as $k=>$v) {$_SERVER[$k] = mysqli_real_escape_string($DB_link, $v);}
 
@@ -33,7 +44,8 @@ if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password'])
         //wymuszenie usuniecia ew. innych sesji uzytkownika
         mysqli_query($DB_link,"CALL pForceRemoveSession('$login');");
 
-        $token= hash('sha256',(md5(rand(-10000,10000) . microtime()) . $_SERVER['REMOTE_ADDR']));
+        $token=hash('sha256',(md5(rand(-10000,10000) . microtime()) . $_SERVER['REMOTE_ADDR']));
+
         mysqli_query($DB_link,"CALL pAddSession('$login','$_SERVER[REMOTE_ADDR]','$token','$_SERVER[HTTP_USER_AGENT]');");
 
         setcookie('id_user', $id_user, false);
@@ -45,7 +57,13 @@ if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password'])
     }
     else
     {
-        //echo "Błędne hasło!"; //todo: usunac po zdebugowaniu
+        $ip=$_SERVER['REMOTE_ADDR'];
+        mysqli_query($DB_link,"INSERT INTO error_logs(ip_address, login) VALUES('$ip','$login')");
+
+
+        /*echo "Błędne hasło!"; //todo: usunac po zdebugowaniu
+        echo $row['salt']."<br>";
+        echo hash("sha256",$password.$SALT.$row['salt']);*/
         header('Location: loginpage.php?login=1');
         exit;
     }

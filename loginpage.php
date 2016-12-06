@@ -120,6 +120,9 @@
                                 case 3:
                                     echo "Błąd logowania."."<br>"."Nie można jednoznacznie zidentyfikować użytkownika o wprowadzonym loginie!!";
                                     break;
+                                case 4:
+                                    echo "Za dużo błędnych prób logowania! Odczekaj kilka minut, po czym spróbuj ponownie.";
+                                    break;
                                 default:
                                     echo "Nieznany blad logowania!";
                                     break;

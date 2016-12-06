@@ -12,7 +12,8 @@ if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password'])
         exit;
     }
 
-    $password=hash("sha256",$_POST['password'].$SALT);
+    $salt_unique=sha1(rand(0,255));
+    $password=hash("sha256",$_POST['password'].$SALT.$salt_unique);
 
     if(isset($_POST['name']) && !empty($_POST['name']))
         $name=mysqli_real_escape_string($DB_link,$_POST['name']);
@@ -24,11 +25,12 @@ if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password'])
     else
         $surname='';
 
-    mysqli_query($DB_link,"CALL pAddUser('$login','$password','$name','$surname');");
+    mysqli_query($DB_link,"CALL pAddUser('$login','$password','$name','$surname','$salt_unique')");
 
     if(mysqli_errno($DB_link))
     {
-        /*echo "mysqli_errno: ".mysqli_errno($DB_link)."<br>";
+        /*echo $salt_unique;
+        echo "mysqli_errno: ".mysqli_errno($DB_link)."<br>";
         echo "mysqli_error: ".mysqli_error($DB_link)."<br>";
         echo "sql state : ".mysqli_sqlstate($DB_link)."<br>";*/
         header("location: loginpage.php?reg=99"); //błąd
