@@ -1,8 +1,10 @@
+<link rel="stylesheet" type="text/css" href="innerpages.css">
 <link rel="stylesheet" type="text/css" href="profileedit.css">
 
 
+
 <div id="column" class="col-6-10">
-    <div id="div-alert">
+    <div class="div-alert">
         <div class="innertube">
             <h3>
                 <?php
@@ -62,7 +64,7 @@
                     <td><input type="password" name="password" placeholder="wpisz tutaj nowe hasło"></td>
                 </tr>
                 <tr>
-                    <td>Kraj:</td> <!--todo: TUTAJ ZROBIĆ JAKOŚ KWESTIĘ WYBORU KRAJU Z LISTY -->
+                    <td>Kraj:</td>
 
                     <div class="invisible-container">
                         <datalist id="countries">

@@ -7,18 +7,7 @@ td{
     padding-right: 0.2em;
 }
 
-#div-alert{
-    display:none;
-    background-color: darkred;
-}
 
-.invisible-container{
-    display:none;
-}
-
-h2{
-    margin-top: 0.3em;
-}
 
 datalist{
     display: inherit;

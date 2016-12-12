@@ -1,0 +1,12 @@
+#div-alert{
+    display:none;
+    background-color: darkred;
+}
+
+h2{
+    margin-top: 0.3em;
+}
+
+.invisible-container{
+    display:none;
+}
