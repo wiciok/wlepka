@@ -38,5 +38,8 @@ if(isset($_POST['login']) && !empty($_POST['login']))
     }
 }
 
+header("location: mainpage.php?page=friends&alert=2");
+exit;
+
 
 ?>

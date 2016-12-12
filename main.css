@@ -67,7 +67,8 @@ main{
 }
 
 .innertube{
-    margin:1em;
+    /*margin:1em;*/
+    margin: 0.9vw;
     margin-top: 0;
     overflow: hidden;
 }

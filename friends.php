@@ -29,6 +29,12 @@
                     case 6:
                         echo "Błąd podczas proby dodania znajomego!"."<br>"."Jesteście już znajomymi!";
                         break;
+                    case 7:
+                        echo "Usunięto znajomość!";
+                        break;
+                    case 8:
+                        echo "Błąd podczas proby usuwania znajomości!";
+                        break;
                     default:
                         echo "Niepoprawny kod komunikatu!";
                         break;
@@ -40,59 +46,91 @@
 </div>
 
 <div class="row">
-    <div id="left-column" class="col-3-10">
+    <div id="left-column" class="col-6-10">
         <div class="innertube">
             <h2>Znajomi</h2>
             <table>
-                <tr>
-                    <td>Login1:</td>
-                    <td>Login2:</td>
-                    <td>Status znajomości:</td>
-                </tr>
                 <?php
                 require_once "connect_to_db.php";
-                $id_user=mysqli_real_escape_string($DB_link,$_COOKIE['id_user']);
 
+                $id_user=mysqli_real_escape_string($DB_link,$_COOKIE['id_user']);
                 $data=mysqli_query($DB_link, "SELECT DISTINCT id_user_1, id_user_2, status FROM friends WHERE id_user_1='$id_user' OR id_user_2='$id_user'");
 
-                for($i=mysqli_num_rows($data);$i>0;$i--)
+                if(mysqli_num_rows($data)==0)
+                    echo "<h3>Nie masz żadnych znajomych!</h3>";
+
+                else
                 {
-                    $row=mysqli_fetch_assoc($data);
-                    $id1=$row['id_user_1'];
-                    $id2=$row['id_user_2'];
-                    $status=$row['status'];
-                    echo "
+                    echo"
                     <tr>
-                        <td>$id1</td>
-                        <td>$id2</td>
-                        <td>";
+                        <td>Login:</td>
+                        <td>Imie:</td>
+                        <td>Nazwisko:</td>
+                        <td>Status znajomości:</td>
+                        <td></td>
+                    </tr>";
 
-                    if($status=='unconfirmed' && $id1!=$id_user) //sytaucja kiedy nie jest potwierdzona znajomość i jesteśmy userem który został zaproszony
+                    for($i=mysqli_num_rows($data);$i>0;$i--)
                     {
-                        echo "
-                        <form action=friend_confirm.php method='post'>
-                        <input type='text' name='id_user_1' value='$id1' style='display: none'>
-                        <input type='text' name='id_user_2' value='$id2' style='display: none'>
-                        <input type='submit' name='' value='Potwierdź'>
-                        </form>";
-                    }
+                        $row=mysqli_fetch_assoc($data);
+                        $id1=$row['id_user_1']; //user ktory dodawal znajomosc
+                        $id2=$row['id_user_2']; //user, ktory potwierdza znajomosc
+                        $status=$row['status'];
 
-                    else
+                        if($id1==$id_user)
+                            $detailed_user_data=mysqli_query($DB_link,"SELECT login, name, surname FROM users WHERE id_user='$id2'");
+                        else
+                            $detailed_user_data=mysqli_query($DB_link,"SELECT login, name, surname FROM users WHERE id_user='$id1'");
+                        $detailed_user_data=mysqli_fetch_assoc($detailed_user_data);
+                        $tmp_login=$detailed_user_data['login'];
+                        $tmp_name=$detailed_user_data['name'];
+                        $tmp_surname=$detailed_user_data['surname'];
+
+                        echo "
+                        <tr>
+                            <td>$tmp_login</td>
+                            <td>$tmp_name</td>
+                            <td>$tmp_surname</td>
+                            <td>";
+
+                        if($status=='unconfirmed' && $id1!=$id_user) //sytaucja kiedy nie jest potwierdzona znajomość i jesteśmy userem który został zaproszony
+                        {
+                            echo "Znajomość niepotwierdzona"."</td>";
+                            echo "
+                            <td>
+                                <form action=friend_confirm.php method='post'>
+                                <input type='text' name='id_user_1' value='$id1' style='display: none'>
+                                <input type='text' name='id_user_2' value='$id2' style='display: none'>
+                                <input type='submit' name='' value='Potwierdź'>
+                                </form>
+                            </td>";
+                        }
+
+                        else
                         {
                             if($status=='unconfirmed')
-                                echo "Znajomość niepotwierdzona";
+                                echo "Znajomość niepotwierdzona"."</td>";
                             else
-                                echo "Znajomość potwierdzona";
+                                echo "Znajomość potwierdzona"."</td>";
+
+                            echo "
+                            <td>
+                                <form action=friend_delete.php method='post'>
+                                <input type='text' name='id_user_1' value='$id1' style='display: none'>
+                                <input type='text' name='id_user_2' value='$id2' style='display: none'>
+                                <input type='submit' name='' value='Usuń'>
+                                </form>
+                            </td>";
                         }
-                    echo"</td>
-                    </tr>";
-                }
-                ?>
+                        echo"
+                        </tr>";
+                    }
+                }?>
             </table>
         </div>
     </div>
 
-    <div id="right-column" class="col-3-10">
+    <div id="right-column" class="col-4-10">
         <div class="invisible-container">
             <datalist id="login_list">
                 <?php
@@ -120,9 +158,8 @@
             <form method="post" action="friend_add.php">
                 <input list="login_list" name="login" placeholder="wpisz login">
                 <br>
-                <input type="submit" value="Dodaj znajomego">
+                <input id="submit-add-friend" type="submit" value="Dodaj znajomego">
             </form>
-
         </div>
     </div>
 </div>
