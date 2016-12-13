@@ -68,7 +68,7 @@
                         </a>
                     </li>
                     <li>
-                        <a>
+                        <a href="mainpage.php?page=fileadd">
                             <div class="div-but-menu-position">
                                 Dodaj plik
                             </div>
@@ -108,6 +108,10 @@
                         {
                             default:
                                 include_once "badpage.php";
+                                break;
+
+                            case "fileadd":
+                                include_once "fileadd.php";
                                 break;
 
                             case "profileedit":

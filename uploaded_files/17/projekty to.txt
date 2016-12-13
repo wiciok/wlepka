@@ -1,0 +1,13 @@
+1.implementacja algorytmów uczenia maszynowego (machine learning) - obszar data science
+2.komunikacja rozproszona
+3.jakis malo popularny jezyk prog (ruby, python, itp)
+
+ma byc calosc bardzo obiektowo, minimum 3 wzorce
+czas do konca semestru
+
+
+------------------
+to zadanka
+1. composite
+2. adapter + stan(?)
+3.

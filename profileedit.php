@@ -4,7 +4,7 @@
 
 
 <div id="column" class="col-6-10">
-    <div class="div-alert">
+    <div id="div-alert">
         <div class="innertube">
             <h3>
                 <?php
