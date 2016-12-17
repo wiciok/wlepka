@@ -1,1 +1,2 @@
-deny from all
+#todo: zrobic tak zeby nie dalo sie wejsc po chamsku z przegladarki, ale zeby dzialalo w aplikacji
+#deny from all

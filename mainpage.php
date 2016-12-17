@@ -36,8 +36,8 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="logout.php">
-                            <div class="div-but-menu-position" id="logout-div-but">
+                        <a href="mainpage.php?page=profile_show&id_user=<?php echo htmlspecialchars($_COOKIE['id_user']); ?>">
+                            <div class="div-but-menu-position">
                                 Uzytkownik:
                                 <?php
 
@@ -55,15 +55,20 @@
                                     echo "powinienes byc wylogowany";
                                 }
                                 ?>
-                                <br>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="logout.php">
+                            <div class="div-but-menu-position" id="logout-div-but">
                                 Wyloguj
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a>
+                        <a href="mainpage.php?page=files_summary">
                             <div class="div-but-menu-position">
-                                Twoje pliki
+                                Wyświetl pliki
                             </div>
                         </a>
                     </li>
@@ -71,13 +76,6 @@
                         <a href="mainpage.php?page=fileadd">
                             <div class="div-but-menu-position">
                                 Dodaj plik
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            <div class="div-but-menu-position">
-                                Udostepnione pliki
                             </div>
                         </a>
                     </li>
@@ -109,16 +107,20 @@
                             default:
                                 include_once "badpage.php";
                                 break;
-
+                            case "profile_show":
+                                include_once "profile_show.php";
+                                break;
                             case "fileadd":
                                 include_once "fileadd.php";
                                 break;
-
                             case "profileedit":
                                 include_once "profileedit.php";
                                 break;
                             case "friends":
                                 include_once "friends.php";
+                                break;
+                            case "files_summary":
+                                include_once "files_summary.php";
                                 break;
                         }
                     }

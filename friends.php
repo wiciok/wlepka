@@ -46,8 +46,8 @@
 </div>
 
 <div class="row">
-    <div id="left-column" class="col-6-10">
-        <div class="innertube">
+    <div id="left-column" class="col-7-10">
+        <div class="innertube" id="div-table">
             <h2>Znajomi</h2>
             <table>
                 <?php
@@ -63,11 +63,11 @@
                 {
                     echo"
                     <tr>
-                        <td>Login:</td>
-                        <td>Imie:</td>
-                        <td>Nazwisko:</td>
-                        <td>Status znajomości:</td>
-                        <td></td>
+                        <th>Login:</th>
+                        <th>Imie:</th>
+                        <th>Nazwisko:</th>
+                        <th>Status znajomości:</th>
+                        <th></th>
                     </tr>";
 
                     for($i=mysqli_num_rows($data);$i>0;$i--)
@@ -78,17 +78,26 @@
                         $status=$row['status'];
 
                         if($id1==$id_user)
+                        {
                             $detailed_user_data=mysqli_query($DB_link,"SELECT login, name, surname FROM users WHERE id_user='$id2'");
+                            $id_other_user=$id2;
+                        }
+
                         else
+                        {
                             $detailed_user_data=mysqli_query($DB_link,"SELECT login, name, surname FROM users WHERE id_user='$id1'");
+                            $id_other_user=$id1;
+                        }
+
                         $detailed_user_data=mysqli_fetch_assoc($detailed_user_data);
                         $tmp_login=$detailed_user_data['login'];
                         $tmp_name=$detailed_user_data['name'];
                         $tmp_surname=$detailed_user_data['surname'];
 
+
                         echo "
                         <tr>
-                            <td>$tmp_login</td>
+                            <td><a href='mainpage.php?page=profile_show&id_user=".$id_other_user."'>$tmp_login</a></td>
                             <td>$tmp_name</td>
                             <td>$tmp_surname</td>
                             <td>";
@@ -130,7 +139,7 @@
         </div>
     </div>
 
-    <div id="right-column" class="col-4-10">
+    <div id="right-column" class="col-3-10">
         <div class="invisible-container">
             <datalist id="login_list">
                 <?php

@@ -1,5 +1,7 @@
 <?php
 
+//todo: refaktoryzacja
+
 require_once "connect_to_db.php";
 require_once "file_constants.php";
 
@@ -43,7 +45,7 @@ if(isset($_FILES['file']) && !empty($_FILES['file']) && isset($_POST['lang_name'
         $ret_code=3;
     }
 
-    
+
     if ($uploadOk == 0)
     {
         echo "Sorry, your file was not uploaded.";

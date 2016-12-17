@@ -3,7 +3,6 @@ td{
 }
 
 
-
 input{
     margin-top: 0.2em;
     margin-bottom: 0.2em;
@@ -44,15 +43,52 @@ table{
     font-size: 1em;
 }
 
+
+
+#div-table{
+    overflow: auto;
+}
+
+/*table, thead, tbody, tr {
+    display: inline-block;
+}
+
+td, th{
+    display:inline-block;
+}*/
+
+
 /*todo: zmienic na zaleznosc od zageszczenia pikseli*/
 @media only screen and ( min-width: 800px ) {
+
     table{
-        font-size: 1.4vw;
+    font-size: 1.5em;
     }
 
-    input[type=submit] {
-        font-size: 1.4vw;
+    /*reset ustawień tabeli do domyślnych:*/
+    /*table{
+        display: table;
     }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tbody {
+        display: table-row-group;
+    }
+
+    th {
+        display: table-cell;
+    }
+
+    td{
+        display: table-cell;
+    }
+    tr{
+        display: table-row;
+    }*/
+
 
     #submit-add-friend{
         font-size: 1em;
