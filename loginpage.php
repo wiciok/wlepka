@@ -74,6 +74,12 @@
                                 case 3:
                                     echo "Błąd rejestracji."."<br>"."Wprowadz login i haslo!";
                                     break;
+                                case 4:
+                                    echo "Błąd rejestracji! Niedozwolony format loginu!"."<br>"."Dozwolone tylko litery i cyfry, spacja znak podkreślenia!";
+                                    break;
+                                case 5:
+                                    echo "Błąd rejestracji! Niedozwolone znaki!"."<br>"."Dozwolone tylko litery!";
+                                    break;
                                 default:
                                     echo "Błąd rejestracji.";
                                     break;

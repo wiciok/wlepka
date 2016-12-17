@@ -26,6 +26,9 @@
                     case 5:
                         echo "Błąd podczas próby przesyłania pliku!"."<br>"."Blad przesyłania danych!";
                         break;
+                    case 6:
+                        echo "Błąd podczas próby przesyłania pliku!"."<br>"."Niepoprawna nazwa pliku!";
+                        break;
                     default:
                         echo "Niepoprawny kod komunikatu!";
                         break;
@@ -62,7 +65,6 @@
             <br><br>
             <input type="file" name="file" id="file_checker" style="display: none">
 
-            <!--todo: zmienic to mouseover na cos lepszego -->
             <input type="text" value="wybierz plik..." readonly id="filename_shower">
             <button id="button_add_file" onclick="document.getElementById('file_checker').click()">Wybierz plik</button>
             <br><br>

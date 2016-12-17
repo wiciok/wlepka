@@ -23,6 +23,9 @@
                         case 3:
                             echo "Błąd! Login zajęty!";
                             break;
+                        case 4:
+                            echo "Wprowadzono niedozwolone znaki lub zbyt długi tekst!";
+                            break;
                         default:
                             echo "Niepoprawny kod komunikatu!";
                             break;

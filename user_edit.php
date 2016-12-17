@@ -7,6 +7,12 @@ $logged_id_user=mysqli_real_escape_string($DB_link,$_COOKIE['id_user']);
 if(isset($_POST['login']) && !empty($_POST['login']))
 {
     $login=mysqli_real_escape_string($DB_link, $_POST['login']);
+    $input_pattern = '/^[\p{L}\p{N}_ ]{1,25}$/u';
+    if(!preg_match($input_pattern,$login))
+    {
+        header("location: mainpage.php?page=profileedit&alert=4"); //niedozwolone znaki w loginie lub za długi
+        exit;
+    }
     $result=mysqli_query($DB_link,"SELECT login FROM users WHERE login='$login'");
 
     if(mysqli_num_rows($result)>0)
@@ -29,18 +35,36 @@ if(isset($_POST['password']) && !empty($_POST['password']))
 if(isset($_POST['name']) && !empty($_POST['name']))
 {
     $name=mysqli_real_escape_string($DB_link, $_POST['name']);
+    $input_pattern = '/^[\p{L}\p{N}_ ]{1,25}$/u';
+    if(!preg_match($input_pattern,$name))
+    {
+        header("location: mainpage.php?page=profileedit&alert=4"); //niedozwolone znaki lub za dlugi
+        exit;
+    }
     mysqli_query($DB_link,"UPDATE users SET name='$name' WHERE id_user=$logged_id_user");
 }
 
 if(isset($_POST['surname']) && !empty($_POST['surname']))
 {
     $surname=mysqli_real_escape_string($DB_link, $_POST['surname']);
+    $input_pattern = '/^[\p{L}\p{N}_ ]{1,25}$/u';
+    if(!preg_match($input_pattern,$surname))
+    {
+        header("location: mainpage.php?page=profileedit&alert=4"); //niedozwolone znaki lub za dlugi
+        exit;
+    }
     mysqli_query($DB_link,"UPDATE users SET surname='$surname' WHERE id_user=$logged_id_user");
 }
 
 if(isset($_POST['country']) && !empty($_POST['country']))
 {
     $country_name=mysqli_real_escape_string($DB_link,$_POST['country']);
+    $input_pattern = '/^[\p{L}\p{N}_ ]{1,25}$/u';
+    if(!preg_match($input_pattern,$country_name))
+    {
+        header("location: mainpage.php?page=profileedit&alert=4"); //niedozwolone znaki lub za dlugi
+        exit;
+    }
 
     $data=mysqli_query($DB_link,"SELECT name FROM countries WHERE name='$country_name'");
     if(mysqli_num_rows($data)==0)

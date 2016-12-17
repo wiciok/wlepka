@@ -20,6 +20,13 @@ if(isset($_FILES['file']) && !empty($_FILES['file']) && isset($_POST['lang_name'
     $target_file = $FILE_TARGET_DIR . basename($file_name);
     $uploadOk = 1;
 
+    $filename_pattern = '/^[\p{L}\p{N}_ ,\.]{1,255}$/u'; //todo:mozna to dopracowac
+    if(!preg_match($filename_pattern,$file_name))
+    {
+        $ret_code=6;
+        $uploadOk = 0;
+    }
+
 
     if (file_exists($target_file))
     {
@@ -36,8 +43,7 @@ if(isset($_FILES['file']) && !empty($_FILES['file']) && isset($_POST['lang_name'
         $ret_code=3;
     }
 
-
-
+    
     if ($uploadOk == 0)
     {
         echo "Sorry, your file was not uploaded.";

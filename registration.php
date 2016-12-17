@@ -3,7 +3,14 @@ require_once "connect_to_db.php";
 
 if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password']) && !empty($_POST['password'])))
 {
-    $login=mysqli_real_escape_string($DB_link,$_POST['login']);
+    $login=$_POST['login'];
+
+    $login_pattern = '/^[\p{L}\p{N}_ ]{1,25}$/u';
+    if(!preg_match($login_pattern,$login))
+    {
+        header("location: loginpage.php?reg=4"); //niedozwolone znaki w loginie
+        exit;
+    }
 
     $result=mysqli_query($DB_link,"select login from users where login='$login'");
     if(mysqli_num_rows($result)>0)
@@ -24,6 +31,15 @@ if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password'])
         $surname=mysqli_real_escape_string($DB_link,$_POST['surname']);
     else
         $surname='';
+
+    $name_pattern = '/^[\p{L}\p{N}_ ]{0,25}$/u';
+    if(!preg_match($name_pattern,$name) || !preg_match($name_pattern,$surname))
+    {
+        header("location: loginpage.php?reg=5"); //niedozwolone znaki w imieniu/nazwisku
+        exit;
+    }
+
+
 
     mysqli_query($DB_link,"CALL pAddUser('$login','$password','$name','$surname','$salt_unique')");
 
