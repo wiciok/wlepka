@@ -122,6 +122,9 @@
                             case "files_summary":
                                 include_once "files_summary.php";
                                 break;
+                            case "file_properties":
+                                include_once "file_properties.php";
+                                break;
                         }
                     }
                     else

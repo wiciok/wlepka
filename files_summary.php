@@ -1,5 +1,5 @@
 <link rel="stylesheet" type="text/css" href="innerpages.css">
-<link rel="stylesheet" type="text/css" href="friends.css">
+<link rel="stylesheet" type="text/css" href="files_summary.css">
 
 <div class="row">
     <div class="col-10-10">
@@ -10,14 +10,14 @@
                 <tr>
                     <th>Nazwa:</th>
                     <th>Język:</th>
-                    <th>Usuń</th>
-                    <th>Udostępnij</th>
+                    <th>Akcje:</th>
                 </tr>
                 <tr>
                     <?php
                     require_once "connect_to_db.php";
 
-                    $data=mysqli_query($DB_link,"SELECT files.name AS filename, languages.name AS langname, path FROM files,languages WHERE languages.id_lang=files.id_lang");
+                    $id_user=mysqli_real_escape_string($DB_link,$_COOKIE['id_user']);
+                    $data=mysqli_query($DB_link,"SELECT files.name AS filename, languages.name AS langname, id_file , path FROM files,languages WHERE languages.id_lang=files.id_lang AND files.id_user='$id_user'");
                     if(mysqli_num_rows($data)==0)
                         echo "<h3>Brak plików!</h3>";
 
@@ -28,9 +28,13 @@
                             $row=mysqli_fetch_assoc($data);
 
                             echo "<tr>";
-                            echo "<td>"."<a target='_blank' href='".$row['path']."'>".$row['filename']."</a>"."</td>";
-                            echo "<td>".$row['langname']."</td>";
-                            echo "<td><button id='del_file' ".$row['langname']."</td>"; //tutaj zrobic usuwanie
+                            echo "<td width='70%'>"."<a target='_blank' href='".$row['path']."'>".$row['filename']."</a>"."</td>";
+                            echo "<td width='15%'>".$row['langname']."</td>";
+                            echo "<td width='15%'>";
+                            echo "
+                            <a href='mainpage.php?page=file_properties&id_file=".$row['id_file']."'><button>Właściwości</button>                            
+                            ";
+
                             echo "</tr>";
                         }
 
