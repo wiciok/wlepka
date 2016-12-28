@@ -38,7 +38,8 @@ if(isset($_FILES['file']) && !empty($_FILES['file']) && isset($_POST['lang_name'
         $ret_code=2;
     }
 
-    if ($_FILES["file"]["size"] > $FILE_MAX_SIZE)
+    //z niewiadomych powodów nie działa poprawnie dla pliku exe (wywala się za to move_uploaded_file poniżej
+    if ($_FILES['file']['size'] > $FILE_MAX_SIZE)
     {
         echo "Sorry, your file is too large.";
         $uploadOk = 0;
@@ -46,22 +47,26 @@ if(isset($_FILES['file']) && !empty($_FILES['file']) && isset($_POST['lang_name'
     }
 
 
-    if ($uploadOk == 0)
-    {
-        echo "Sorry, your file was not uploaded.";
-    }
-    else
+    if ($uploadOk == 1)
     {
         $data=mysqli_query($DB_link,"SELECT id_lang FROM languages WHERE name='$lang_name'");
         $row=mysqli_fetch_assoc($data);
         $lang_id=$row['id_lang'];
 
-        mysqli_query($DB_link, "INSERT INTO files(path,name,id_user,id_lang) VALUES('$target_file','$file_name','$id_user','$lang_id')");
 
-        if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file) && !mysqli_error($DB_link))
+        if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file))
         {
-            echo "The file ". $file_name. " has been uploaded.";
-            $ret_code=1;
+            mysqli_query($DB_link, "INSERT INTO files(path,name,id_user,id_lang) VALUES('$target_file','$file_name','$id_user','$lang_id')");
+            if(!mysqli_error($DB_link))
+            {
+                echo "The file ". $file_name. " has been uploaded.";
+                $ret_code=1;
+            }
+            else
+            {
+                echo "Sorry, there was an error uploading your file.";
+                $ret_code=4;
+            }
         }
         else
         {
@@ -69,6 +74,8 @@ if(isset($_FILES['file']) && !empty($_FILES['file']) && isset($_POST['lang_name'
             $ret_code=4;
         }
     }
+    else
+        echo "plik nie zostal przeslany";
 }
 else
 {

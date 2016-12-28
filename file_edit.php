@@ -12,6 +12,11 @@ if(!(isset($_POST['id_file']) && !empty($_POST['id_file']) && isset($_POST['id_u
 $id_file=mysqli_real_escape_string($DB_link,$_POST['id_file']);
 $id_user=mysqli_real_escape_string($DB_link,$_POST['id_user']);
 
+//usuwanie pliku
+if($_POST['delete'])
+{
+    //todo: dorobić usuwanie pliku!!!!
+}
 
 //zmiana nazwy
 try

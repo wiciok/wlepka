@@ -146,15 +146,21 @@
                 require_once "connect_to_db.php";
 
 
-                //todo: zmienic to zeby nie wyswietlali sie userzy ktorzy juz sa znajomymi
                 $id_user=mysqli_real_escape_string($DB_link,$_COOKIE['id_user']);
-                $data=mysqli_query($DB_link,"SELECT login FROM users WHERE login!=(SELECT login FROM users WHERE id_user='$id_user') ");
+
+                //wyswietlamy tylko loginy userów, którzy nie są nami i nie mamy ich w znajomych
+                $data=mysqli_query($DB_link,"
+                    SELECT login FROM users 
+                    WHERE id_user!=$id_user
+                    AND id_user!= ALL(SELECT id_user_1 FROM friends WHERE id_user_2=$id_user)
+                    AND id_user!=ALL(SELECT id_user_2 FROM friends WHERE id_user_1=$id_user);
+                     ");
                 $num_rows=mysqli_num_rows($data);
 
                 while($num_rows>0)
                 {
                     $row=mysqli_fetch_assoc($data);
-                    echo htmlspecialchars('<option value='.$row['login'].'>');
+                    echo '<option value='.'\''.$row['login'].'\''.'></option>';
                     $num_rows--;
                 }
                 ?>

@@ -134,7 +134,13 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                                <input type="submit" value="Edytuj">
+                            <input type="submit" name="edit" value="Edytuj">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" name="delete" value="Usuń plik">
+                            <!-- todo: ZROBIĆ USUWANIE PLIKU! -->
                         </td>
                     </tr>
 
@@ -149,8 +155,57 @@
         </div>
     </div>
     <div class="col-2-10">
+        <div class="invisible-container">
+            <datalist id="friends_logins_list">
+                <?php
+                require_once "connect_to_db.php";
+
+
+                $id_user=mysqli_real_escape_string($DB_link,$_COOKIE['id_user']);
+
+                //wyswietlamy tylko loginy userów, których mamy ich w znajomych i są potwierdzeni
+                $data=mysqli_query($DB_link,"
+                    SELECT login FROM users 
+                    WHERE id_user!=$id_user
+                    AND id_user= ANY(SELECT id_user_1 FROM friends WHERE id_user_2=$id_user AND status='confirmed')
+                    OR id_user=ANY(SELECT id_user_2 FROM friends WHERE id_user_1=$id_user AND status='confirmed');
+                     ");
+                $num_rows=mysqli_num_rows($data);
+
+                while($num_rows>0)
+                {
+                    $row=mysqli_fetch_assoc($data);
+                    echo '<option value='.'\''.$row['login'].'\''.'></option>';
+                    $num_rows--;
+                }
+                ?>
+            </datalist>
+        </div>
         <div class="innertube">
             <h2>Udostępnij</h2>
+
+            <script>
+                function show_login_list()
+                {
+                    if(document.getElementById('permission_type').value=='read_user' || document.getElementById('permission_type').value=='read_write_user')
+                        document.getElementById("login_list").style.display='inherit';
+                }
+            </script>
+
+            <form method="post" id="share_form" action="file_share_add.php">
+                <select name="permission_type" id="permission_type" onchange="show_login_list()">
+                    <option value="read_friends">Odczyt - wszyscy znajomi</option>
+                    <option value="read_write_friends">Odczyt/zapis - wszyscy znajomi</option>
+                    <option value="read_user">Odczyt - znajomy</option>
+                    <option value="read_write_user">Odczyt/zapis - znajomy</option>
+                    <option value="read_all">Odczyt - wszyscy</option>
+                </select>
+                <br>
+                <input list="login_list" id="login_list" name="login" placeholder="wpisz login" value="" style="display: none">
+                <br>
+                <br>
+                <input id="submit-add-friend" type="submit" value="Udostępnij">
+            </form>
         </div>
     </div>
 </div>
