@@ -149,12 +149,28 @@
 
         </div>
     </div>
-    <div class="col-4-10">
+    <div class="col-3-10">
         <div class="innertube">
             <h2>Udostępnienia</h2>
+            <table>
+                <tr>
+                    <th>Typ:</th>
+                    <th>ID:</th>
+                </tr>
+
+                <tr>
+                    <td>lorem</td>
+                    <td>ipsum</td>
+                </tr>
+                <tr>
+                    <td colspan="2">dolor sit amet</td>
+                </tr>
+            </table>
+
         </div>
     </div>
-    <div class="col-2-10">
+
+    <div class="col-3-10">
         <div class="invisible-container">
             <datalist id="friends_logins_list">
                 <?php
@@ -202,6 +218,9 @@
                 </select>
                 <br>
                 <input list="login_list" id="login_list" name="login" placeholder="wpisz login" value="" style="display: none">
+
+                <input name="id_file" value="<?php echo $id_file ?>" style="display: none">
+                <input name="id_user" value="<?php echo $id_user ?>" style="display: none">
                 <br>
                 <br>
                 <input id="submit-add-friend" type="submit" value="Udostępnij">
