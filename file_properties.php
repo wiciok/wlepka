@@ -155,16 +155,52 @@
             <table>
                 <tr>
                     <th>Typ:</th>
-                    <th>ID:</th>
+                    <th>Użytkownik:</th>
                 </tr>
+                <?php
 
-                <tr>
-                    <td>lorem</td>
-                    <td>ipsum</td>
-                </tr>
-                <tr>
-                    <td colspan="2">dolor sit amet</td>
-                </tr>
+                require_once "connect_to_db.php";
+
+                $dict=[
+                    "read_friends"=>"Odczyt - wszyscy znajomi",
+                    "read_write_friends"=>"Odczyt/zapis - wszyscy znajomi",
+                    "read_user"=>"Odczyt - znajomy",
+                    "read_write_user"=>"Odczyt/zapis - znajomy",
+                    "read_all"=>"Odczyt - wszyscy"
+                ];
+
+                $data=mysqli_query($DB_link, "
+                          SELECT shares.id_permission, permission_name, login 
+                          FROM permissions LEFT JOIN users ON permissions.id_shared_user=users.id_user 
+                          LEFT JOIN shares ON shares.id_permission=permissions.id_permission 
+                          WHERE id_file='$id_file'");
+
+                if(mysqli_num_rows($data)>0)
+                {
+                    for($i=mysqli_num_rows($data);$i>0;$i--)
+                    {
+                        $row=mysqli_fetch_assoc($data);
+                        $id_permission=$row['id_permission'];
+
+                        echo "<tr>";
+                        //echo "<td>".$row['permission_name']."</td>";
+                        echo "<td>".$dict[($row['permission_name'])]."</td>";
+                        echo "<td>".$row['login']."</td>";
+                        echo "</tr><tr>";
+                        echo "<td colspan='2'>"."
+                        <form action='file_share_delete.php' method='post'>
+                        <input type='text' name='id_user' style='display:none' value='$id_user'>
+                        <input type='text' name='id_file' style='display: none' value='$id_file'>
+                        <input type='text' name='id_permission' style='display:none' value='$id_permission'>
+                        <input type='submit' value='Usuń'>
+                        </form></td>";
+                        echo "</tr>";
+                    }
+                }
+                else
+                    echo "<tr></tr><td colspan='2'>"."brak udostępnień!"."</td></tr>";
+                ?>
+
             </table>
 
         </div>
@@ -191,7 +227,7 @@
                 while($num_rows>0)
                 {
                     $row=mysqli_fetch_assoc($data);
-                    echo '<option value='.'\''.$row['login'].'\''.'></option>';
+                    echo "<option value='".$row['login']."'>".$row['login']."</option>";
                     $num_rows--;
                 }
                 ?>
@@ -210,14 +246,14 @@
 
             <form method="post" id="share_form" action="file_share_add.php">
                 <select name="permission_type" id="permission_type" onchange="show_login_list()">
-                    <option value="read_friends">Odczyt - wszyscy znajomi</option>
-                    <option value="read_write_friends">Odczyt/zapis - wszyscy znajomi</option>
-                    <option value="read_user">Odczyt - znajomy</option>
-                    <option value="read_write_user">Odczyt/zapis - znajomy</option>
-                    <option value="read_all">Odczyt - wszyscy</option>
+                    <option value="read_friends"><?php echo $dict['read_friends'] ?></option>
+                    <option value="read_write_friends"><?php echo $dict['read_write_friends'] ?></option>
+                    <option value="read_user"><?php echo $dict['read_user'] ?></option>
+                    <option value="read_write_user"><?php echo $dict['read_write_user'] ?></option>
+                    <option value="read_all"><?php echo $dict['read_all'] ?></option>
                 </select>
                 <br>
-                <input list="login_list" id="login_list" name="login" placeholder="wpisz login" value="" style="display: none">
+                <input list="friends_logins_list" id="login_list" name="login" placeholder="wpisz login" value="" style="display: none">
 
                 <input name="id_file" value="<?php echo $id_file ?>" style="display: none">
                 <input name="id_user" value="<?php echo $id_user ?>" style="display: none">

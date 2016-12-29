@@ -1,6 +1,7 @@
 <?php
 
 //todo: obsluga wyjatków tutaj
+//todo: sprawdzanie czy user jest naszym znajomym i czy w ogole istnieje
 
 require_once "connect_to_db.php";
 
