@@ -1,6 +1,8 @@
 <link rel="stylesheet" type="text/css" href="innerpages.css">
 <link rel="stylesheet" type="text/css" href="files_summary.css">
 
+<!-- todo: alert z obsługą błędow! m.in. blad usuwania pliku -->
+
 <div class="row">
     <div class="col-10-10">
         <div class="innertube" id="div-table">

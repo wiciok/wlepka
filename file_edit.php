@@ -15,7 +15,53 @@ $id_user=mysqli_real_escape_string($DB_link,$_POST['id_user']);
 //usuwanie pliku
 if($_POST['delete'])
 {
-    //todo: dorobić usuwanie pliku!!!!
+    try
+    {
+        $data=mysqli_query($DB_link,"SELECT path FROM files WHERE id_file='$id_file'");
+        if(mysqli_num_rows($data)!=1)
+            throw new mysqli_sql_exception("ilosc plikow o danym id rozna od 1");
+        $row=mysqli_fetch_assoc($data);
+        $path=$row["path"];
+
+
+        //wczytanie pozostałych udostępnień
+        $data=mysqli_query($DB_link,"
+          SELECT id_permission 
+          FROM shares 
+          WHERE id_file='$id_file'
+          AND NOT(id_permission=1 OR id_permission=2 OR id_permission=3)");
+
+        if(!unlink($path))
+            throw new Exception("blad fizycznego usuwania pliku");
+
+        mysqli_query($DB_link,"DELETE FROM files WHERE id_file='$id_file'");
+        if(mysqli_error($DB_link))
+            throw new mysqli_sql_exception("blad usuwania pliku z bazy");
+
+        //usuniecie pozostalych udostepnien
+
+        for ($i=mysqli_num_rows($data);$i>0;$i--)
+        {
+            $row=mysqli_fetch_assoc($data);
+            $id_permission=$row['id_permission'];
+            mysqli_query($DB_link,"DELETE FROM permissions WHERE id_permission='$id_permission'");
+        }
+
+        if(mysqli_error($DB_link))
+            throw new mysqli_sql_exception("blad usuwania zbednych uprawnien z bazy");
+    }
+
+    catch(Exception $e)
+    {
+        echo $e->getMessage();
+        $retcode=1;
+    }
+
+    finally
+    {
+        header("location: mainpage.php?page=files_summary&alert=".$retcode);
+        exit;
+    }
 }
 
 //zmiana nazwy
@@ -60,14 +106,14 @@ try
 
 catch(Exception $e)
 {
-    echo $e;
-    header("location: mainpage.php?page=file_properties&id_file=".$_POST['id_file']."&alert=6");
-    exit;
+    $retcode=6;
+    echo $e->getMessage();
 }
 
 finally
 {
-    header("location: mainpage.php?page=file_properties&id_file=".$_POST['id_file']."&alert=5");
+    $retcode=5;
+    header("location: mainpage.php?page=file_properties&id_file=".$_POST['id_file']."&alert=".$retcode);
     exit;
 }
 

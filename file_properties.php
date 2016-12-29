@@ -26,6 +26,9 @@
                     case 6:
                         echo "Błąd edycji danych!";
                         break;
+                    case 7:
+                        echo "Błąd usuwania udostępnienia!";
+                        break;
                     default:
                         echo "Niepoprawny kod komunikatu!";
                         break;
@@ -140,7 +143,6 @@
                     <tr>
                         <td colspan="2">
                             <input type="submit" name="delete" value="Usuń plik">
-                            <!-- todo: ZROBIĆ USUWANIE PLIKU! -->
                         </td>
                     </tr>
 
