@@ -60,8 +60,8 @@
 
     <div class="col-4-10">
         <h2>Dodaj plik</h2>
-        <form action="file_upload.php" method="post" onsubmit="return document.getElementById('file_checker').value != ''" enctype="multipart/form-data">
-            Wybierz plik do przesłania (max. rozmiar <?php include_once "file_constants.php"; echo $FILE_MAX_SIZE/1000 .'kB'; ?>):
+        <form action="backend/file_upload.php" method="post" onsubmit="return document.getElementById('file_checker').value != ''" enctype="multipart/form-data">
+            Wybierz plik do przesłania (max. rozmiar <?php require_once "backend/file_constants.php"; echo $FILE_MAX_SIZE/1000 .'kB'; ?>):
             <br><br>
             <input type="file" name="file" id="file_checker" style="display: none">
 
@@ -72,7 +72,7 @@
             <select name="lang_name" id="select_lang" onchange="checkSubmitButton()">
                 <option value="not_chosen" selected="true" disabled="disabled">-wybierz-</option>
                 <?php
-                require_once "connect_to_db.php";
+                require_once "backend/connect_to_db.php";
 
                 $data=mysqli_query($DB_link,"SELECT name FROM languages;");
                 $num_rows=mysqli_num_rows($data);

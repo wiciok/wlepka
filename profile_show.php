@@ -5,7 +5,7 @@
                 Informacje o profilu
             </h2>
             <?php
-            require_once "connect_to_db.php";
+            require_once "backend/connect_to_db.php";
 
             if(isset($_GET['id_user']) && !empty($_GET['id_user']))
             {

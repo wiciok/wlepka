@@ -1,5 +1,6 @@
 <?php
 require_once "connect_to_db.php";
+require_once "logged_in_check.php";
 
 $retcode=0;
 try
@@ -31,9 +32,9 @@ catch(Exception $e)
 finally
 {
     if(isset($id_file))
-        header("location: mainpage.php?page=file_properties&id_file=".$id_file."&alert=".$retcode);
+        header('Location:'.$URL.'mainpage.php?page=file_properties&id_file='.$id_file.'&alert='.$retcode);
     else
-        header('location: mainpage.php');
+        header('Location:'.$URL.'mainpage.php');
     exit;
 }
 

@@ -37,7 +37,7 @@
                 </tr>
                 <tr>
                     <?php
-                    require_once "connect_to_db.php";
+                    require_once "backend/connect_to_db.php";
 
                     $id_user=mysqli_real_escape_string($DB_link,$_COOKIE['id_user']);
                     $data=mysqli_query($DB_link,"SELECT files.name AS filename, languages.name AS langname, id_file , path FROM files,languages WHERE languages.id_lang=files.id_lang AND files.id_user='$id_user'");

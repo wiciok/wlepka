@@ -1,1 +1,1 @@
-<h2>Wybierz co chcesz zrobić w menu po lewej stronie.</h2>
+<h2>Wybierz co chcesz zrobić w menu głównym.</h2>

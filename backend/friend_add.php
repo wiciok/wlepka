@@ -1,5 +1,7 @@
 <?php
 require_once "connect_to_db.php";
+require_once "logged_in_check.php";
+
 $id_user=mysqli_real_escape_string($DB_link,$_COOKIE['id_user']);
 
 if(isset($_POST['login']) && !empty($_POST['login']))
@@ -15,7 +17,7 @@ if(isset($_POST['login']) && !empty($_POST['login']))
 
         if(!mysqli_error($DB_link))
         {
-            header("location: mainpage.php?page=friends&alert=1");
+            header('Location:'.$URL.'mainpage.php?page=friends&alert=1');
             exit;
         }
         else
@@ -24,21 +26,21 @@ if(isset($_POST['login']) && !empty($_POST['login']))
             //echo mysqli_error($DB_link);
 
             if(mysqli_errno($DB_link)==1062)
-                header("location: mainpage.php?page=friends&alert=6"); //blad - uzytkownicy sa juz znajomymi
+                header('Location:'.$URL.'mainpage.php?page=friends&alert=6'); //blad - uzytkownicy sa juz znajomymi
             else
-                header("location: mainpage.php?page=friends&alert=2"); //blad
+                header('Location:'.$URL.'mainpage.php?page=friends&alert=2'); //blad
             exit;
         }
     }
 
     else
     {
-        header("location: mainpage.php?page=friends&alert=5"); //blad - proba bycia znajomym samego siebie
+        header('Location:'.$URL.'mainpage.php?page=friends&alert=5'); //blad - proba bycia znajomym samego siebie
         exit;
     }
 }
 
-header("location: mainpage.php?page=friends&alert=2");
+header('Location:'.$URL.'mainpage.php?page=friends&alert=2');
 exit;
 
 

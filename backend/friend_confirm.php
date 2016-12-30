@@ -1,5 +1,7 @@
 <?php
 require_once "connect_to_db.php";
+require_once "logged_in_check.php";
+
 
 if(isset($_POST['id_user_1']) && !empty($_POST['id_user_1']) && isset($_POST['id_user_2']) && !empty($_POST['id_user_2']))
 {
@@ -12,17 +14,15 @@ if(isset($_POST['id_user_1']) && !empty($_POST['id_user_1']) && isset($_POST['id
 
         if(!mysqli_error($DB_link))
         {
-            header("location: mainpage.php?page=friends&alert=3");
+            header('Location:'.$URL.'mainpage.php?page=friends&alert=3');
             exit;
         }
         else
         {
             echo mysqli_error($DB_link);
-            //header("location: mainpage.php?page=friends&alert=4"); //blad
+            //header('Location:'.$URL.'mainpage.php?page=friends&alert=4'); //blad
             exit;
         }
     }
 }
-
-
 ?>

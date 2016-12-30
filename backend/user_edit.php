@@ -1,5 +1,6 @@
 <?php
 require_once "connect_to_db.php";
+require_once "logged_in_check.php";
 
 $logged_id_user=mysqli_real_escape_string($DB_link,$_COOKIE['id_user']);
 
@@ -10,14 +11,14 @@ if(isset($_POST['login']) && !empty($_POST['login']))
     $input_pattern = '/^[\p{L}\p{N}_ ]{1,25}$/u';
     if(!preg_match($input_pattern,$login))
     {
-        header("location: mainpage.php?page=profileedit&alert=4"); //niedozwolone znaki w loginie lub za długi
+        header('Location:'.$URL.'mainpage.php?page=profileedit&alert=4'); //niedozwolone znaki w loginie lub za długi
         exit;
     }
     $result=mysqli_query($DB_link,"SELECT login FROM users WHERE login='$login'");
 
     if(mysqli_num_rows($result)>0)
     {
-        header('Location: mainpage.php?page=profileedit&alert=3');
+        header('Location:'.$URL.'mainpage.php?page=profileedit&alert=3');
         exit;
     }
     else
@@ -38,7 +39,7 @@ if(isset($_POST['name']) && !empty($_POST['name']))
     $input_pattern = '/^[\p{L}\p{N}_ ]{1,25}$/u';
     if(!preg_match($input_pattern,$name))
     {
-        header("location: mainpage.php?page=profileedit&alert=4"); //niedozwolone znaki lub za dlugi
+        header('Location:'.$URL.'mainpage.php?page=profileedit&alert=4'); //niedozwolone znaki lub za dlugi
         exit;
     }
     mysqli_query($DB_link,"UPDATE users SET name='$name' WHERE id_user=$logged_id_user");
@@ -50,7 +51,7 @@ if(isset($_POST['surname']) && !empty($_POST['surname']))
     $input_pattern = '/^[\p{L}\p{N}_ ]{1,25}$/u';
     if(!preg_match($input_pattern,$surname))
     {
-        header("location: mainpage.php?page=profileedit&alert=4"); //niedozwolone znaki lub za dlugi
+        header('Location:'.$URL.'mainpage.php?page=profileedit&alert=4'); //niedozwolone znaki lub za dlugi
         exit;
     }
     mysqli_query($DB_link,"UPDATE users SET surname='$surname' WHERE id_user=$logged_id_user");
@@ -62,7 +63,7 @@ if(isset($_POST['country']) && !empty($_POST['country']))
     $input_pattern = '/^[\p{L}\p{N}_ ]{1,25}$/u';
     if(!preg_match($input_pattern,$country_name))
     {
-        header("location: mainpage.php?page=profileedit&alert=4"); //niedozwolone znaki lub za dlugi
+        header('Location:'.$URL.'mainpage.php?page=profileedit&alert=4'); //niedozwolone znaki lub za dlugi
         exit;
     }
 
@@ -93,12 +94,12 @@ if(mysqli_error($DB_link))
 {
     //echo mysqli_errno($DB_link);
     //echo mysqli_error($DB_link);
-    header('Location: mainpage.php?page=profileedit&alert=2');
+    header('Location:'.$URL.'mainpage.php?page=profileedit&alert=2');
     exit;
 }
 else
 {
-    header('Location: mainpage.php?page=profileedit&alert=1');
+    header('Location:'.$URL.'mainpage.php?page=profileedit&alert=1');
     exit;
 }
 

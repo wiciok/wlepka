@@ -51,7 +51,7 @@
             <h2>Znajomi</h2>
             <table>
                 <?php
-                require_once "connect_to_db.php";
+                require_once "backend/connect_to_db.php";
 
                 $id_user=mysqli_real_escape_string($DB_link,$_COOKIE['id_user']);
                 $data=mysqli_query($DB_link, "SELECT DISTINCT id_user_1, id_user_2, status FROM friends WHERE id_user_1='$id_user' OR id_user_2='$id_user'");
@@ -107,7 +107,7 @@
                             echo "Znajomość niepotwierdzona"."</td>";
                             echo "
                             <td>
-                                <form action=friend_confirm.php method='post'>
+                                <form action=backend/friend_confirm.php method='post'>
                                 <input type='text' name='id_user_1' value='$id1' style='display: none'>
                                 <input type='text' name='id_user_2' value='$id2' style='display: none'>
                                 <input type='submit' name='' value='Potwierdź'>
@@ -124,7 +124,7 @@
 
                             echo "
                             <td>
-                                <form action=friend_delete.php method='post'>
+                                <form action=backend/friend_delete.php method='post'>
                                 <input type='text' name='id_user_1' value='$id1' style='display: none'>
                                 <input type='text' name='id_user_2' value='$id2' style='display: none'>
                                 <input type='submit' name='' value='Usuń'>
@@ -143,9 +143,6 @@
         <div class="invisible-container">
             <datalist id="login_list">
                 <?php
-                require_once "connect_to_db.php";
-
-
                 $id_user=mysqli_real_escape_string($DB_link,$_COOKIE['id_user']);
 
                 //wyswietlamy tylko loginy userów, którzy nie są nami i nie mamy ich w znajomych
@@ -170,7 +167,7 @@
         <div class="innertube">
             <h2>Dodaj znajomego</h2>
 
-            <form method="post" action="friend_add.php">
+            <form method="post" action="backend/friend_add.php">
                 <input list="login_list" name="login" placeholder="wpisz login">
                 <br>
                 <input id="submit-add-friend" type="submit" value="Dodaj znajomego">

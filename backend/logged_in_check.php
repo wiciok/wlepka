@@ -29,12 +29,12 @@ if (isset($_COOKIE['id_user']) && isset($_COOKIE['token']) && isset($_COOKIE['ac
         {
             $action_token=hash('sha256',rand(-90000,90000));
             mysqli_query($DB_link,"UPDATE current_sessions SET action_token='$action_token' WHERE id_user='$cookieID_user'");
-            setcookie('action_token',$action_token,false);
+            setcookie('action_token',$action_token,false,'/');
 
             if (basename($_SERVER['PHP_SELF'])!="mainpage.php")
             {
                 //echo "poprawne zalogowanie";
-                header('Location: mainpage.php');
+                header('Location:'.$URL.'mainpage.php');
                 exit;
             }
         }
@@ -51,7 +51,7 @@ else
     if (basename($_SERVER['PHP_SELF'])!="loginpage.php")
     {
         //echo "brak cookie";
-        header('Location: loginpage.php');
+        header('Location:'.$URL.'loginpage.php');
         exit;
     }
 }

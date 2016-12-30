@@ -7,22 +7,22 @@ mysqli_query($DB_link,"CALL pRemSession('$cookieToken');");
 if(isset($_COOKIE['id_user']))
 {
     unset($_COOKIE['id_user']);
-    setcookie('id_user', null, -1);
+    setcookie('id_user', null, -1,'/');
 }
 
 if(isset($_COOKIE['token']))
 {
     unset($_COOKIE['token']);
-    setcookie('token', null, -1);
+    setcookie('token', null, -1,'/');
 }
 
 if(isset($_COOKIE['token']))
 {
     unset($_COOKIE['action_token']);
-    setcookie('action_token',null,-1);
+    setcookie('action_token',null,-1,'/');
 }
 
-header("Location: index.php");
+header('Location:'.$URL.'index.php');
 exit;
 
 ?>

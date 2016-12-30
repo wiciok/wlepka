@@ -40,13 +40,13 @@
         <h2>Edytuj Profil</h2>
         <h3>Wpisz zawartość w pola, które chcesz edytować. Jeśli nie chcesz zmieniać jakiejś danej, pozostaw puste pole.<br></h3>
 
-        <form method="post" action="user_edit.php">
+        <form method="post" action="backend/user_edit.php">
             <table>
                 <tr>
                     <td>Imię:</td>
                     <td>
                         <input type="text" name="name" placeholder="<?php
-                        require_once "connect_to_db.php";
+                        require_once "backend/connect_to_db.php";
                         $logged_id_user=mysqli_real_escape_string($DB_link,$_COOKIE['id_user']);
                         $logged_user_row=mysqli_fetch_assoc(mysqli_query($DB_link,"select * from users where id_user='$logged_id_user'"));
 
@@ -72,8 +72,6 @@
                     <div class="invisible-container">
                         <datalist id="countries">
                             <?php
-                            require_once "connect_to_db.php";
-
                             $data=mysqli_query($DB_link,"SELECT name FROM countries");
                             $num_rows=mysqli_num_rows($data);
 

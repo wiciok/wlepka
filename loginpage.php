@@ -14,14 +14,14 @@
     </style>
 
     <?php
-        require_once "connect_to_db.php";
-        require_once "logged_in_check.php";
+        require_once "backend/connect_to_db.php";
+        require_once "backend/logged_in_check.php";
     ?>
 </head>
 
 <body>
 
-<?php require_once "my_header.php"?>
+<?php require_once "my_header.html" ?>
 
 <div id="JSValidator">
     <h2>
@@ -88,7 +88,7 @@
                         ?>
                     </h3>
                 </div>
-                <form method="post" action="registration.php" name="registrationForm">
+                <form method="post" action="backend/registration.php" name="registrationForm">
                     Imię:<br>
                     <input type="text" name="name" class="input_text"><br>
                     Nazwisko:<br>
@@ -137,7 +137,7 @@
                         ?>
                     </h3>
                 </div>
-                <form method="post" action="login.php" name="loginForm">
+                <form method="post" action="backend/login.php" name="loginForm">
                     Login:<br>
                     <input type="text" name="login" class="input_text"><br>
                     Hasło:<br>

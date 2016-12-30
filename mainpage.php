@@ -12,13 +12,13 @@
         @import url('https://fonts.googleapis.com/css?family=Poiret+One&subset=latin-ext');
     </style>
 
-    <?php require_once "logged_in_check.php";
+    <?php require_once "backend/logged_in_check.php";
     ?>
 </head>
 
 <body>
 
-<?php require_once "my_header.php"?>
+<?php require_once "my_header.html" ?>
 
 <div id="JSValidator">
     <h2>
@@ -40,8 +40,7 @@
                             <div class="div-but-menu-position">
                                 Uzytkownik:
                                 <?php
-
-                                require_once "connect_to_db.php";
+                                require_once "backend/connect_to_db.php";
 
                                 if(isset($_COOKIE['id_user']))
                                 {
@@ -50,15 +49,13 @@
                                     echo htmlspecialchars($row['login']);
                                 }
                                 else
-                                {
                                     echo "powinienes byc wylogowany";
-                                }
                                 ?>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="logout.php">
+                        <a href="backend/logout.php">
                             <div class="div-but-menu-position" id="logout-div-but">
                                 Wyloguj
                             </div>
@@ -104,7 +101,7 @@
                         switch(htmlspecialchars_decode($_GET['page']))
                         {
                             default:
-                                include_once "badpage.php";
+                                include_once "badpage.html";
                                 break;
                             case "profile_show":
                                 include_once "profile_show.php";

@@ -1,7 +1,6 @@
 <?php
-//todo: jeśli wprowadze mozliwosc edytowania plikow przez udostepnione osoby, to dorobić tutaj transakcje
 require_once "connect_to_db.php";
-
+require_once "logged_in_check.php";
 
 if(!(isset($_POST['id_file']) && !empty($_POST['id_file']) && isset($_POST['id_user']) && !empty($_POST['id_user'])))
 {
@@ -66,7 +65,7 @@ if($_POST['delete'])
 
     finally
     {
-        header("location: mainpage.php?page=files_summary&alert=".$retcode);
+        header('Location:'.$URL.'mainpage.php?page=files_summary&alert='.$retcode);
         exit;
     }
 }
@@ -126,8 +125,7 @@ catch(Exception $e)
 finally
 {
     $retcode=5;
-    header("location: mainpage.php?page=file_properties&id_file=".$_POST['id_file']."&alert=".$retcode);
+    header('Location:'.$URL.'mainpage.php?page=file_properties&id_file='.$_POST["id_file"].'&alert='.$retcode);
     exit;
 }
-
 ?>

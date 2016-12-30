@@ -47,7 +47,7 @@
             <h2>Właściwości pliku</h2>
 
             <?php
-            require_once "connection_data.php";
+            require_once "backend/connection_data.php";
 
 
             //inicjalizacja zmiennych
@@ -117,7 +117,7 @@
             $file_owner=$row['login'];
             ?>
 
-            <form action="file_edit.php" method="POST">
+            <form action="backend/file_edit.php" method="POST">
                 <input type="text" name="id_file" value="<?php echo "$id_file"; ?>" style="display: none">
                 <input type="text" name="id_user" value="<?php echo "$id_user"; ?>" style="display: none">
                 <table>
@@ -183,7 +183,7 @@
                 </tr>
                 <?php
 
-                require_once "connect_to_db.php";
+                require_once "backend/connect_to_db.php";
 
                 $dict=[
                     "read_friends"=>"Odczyt - wszyscy znajomi",
@@ -234,10 +234,7 @@
         <div class="invisible-container">
             <datalist id="friends_logins_list">
                 <?php
-                require_once "connect_to_db.php";
-
-
-                $id_user=mysqli_real_escape_string($DB_link,$_COOKIE['id_user']);
+                 $id_user=mysqli_real_escape_string($DB_link,$_COOKIE['id_user']);
 
                 //wyswietlamy tylko loginy userów, których mamy ich w znajomych i są potwierdzeni
                 $data=mysqli_query($DB_link,"
@@ -268,7 +265,7 @@
                 }
             </script>
 
-            <form method="post" id="share_form" action="file_share_add.php">
+            <form method="post" id="share_form" action="backend/file_share_add.php">
                 <select name="permission_type" id="permission_type" onchange="show_login_list()">
                     <option value="read_friends"><?php echo $dict['read_friends'] ?></option>
                     <option value="read_write_friends"><?php echo $dict['read_write_friends'] ?></option>

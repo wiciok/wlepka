@@ -8,14 +8,14 @@ if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password'])
     $login_pattern = '/^[\p{L}\p{N}_ ]{1,25}$/u';
     if(!preg_match($login_pattern,$login))
     {
-        header("location: loginpage.php?reg=4"); //niedozwolone znaki w loginie
+        header('Location:'.$URL.'loginpage.php?reg=4'); //niedozwolone znaki w loginie
         exit;
     }
 
     $result=mysqli_query($DB_link,"select login from users where login='$login'");
     if(mysqli_num_rows($result)>0)
     {
-        header("location: loginpage.php?reg=2"); //login zajęty
+        header('Location:'.$URL.'loginpage.php?reg=2'); //login zajęty
         exit;
     }
 
@@ -35,7 +35,7 @@ if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password'])
     $name_pattern = '/^[\p{L}\p{N}_ ]{0,25}$/u';
     if(!preg_match($name_pattern,$name) || !preg_match($name_pattern,$surname))
     {
-        header("location: loginpage.php?reg=5"); //niedozwolone znaki w imieniu/nazwisku
+        header('Location:'.$URL.'loginpage.php?reg=5'); //niedozwolone znaki w imieniu/nazwisku
         exit;
     }
 
@@ -49,19 +49,19 @@ if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password'])
         echo "mysqli_errno: ".mysqli_errno($DB_link)."<br>";
         echo "mysqli_error: ".mysqli_error($DB_link)."<br>";
         echo "sql state : ".mysqli_sqlstate($DB_link)."<br>";*/
-        header("location: loginpage.php?reg=99"); //błąd
+        header('Location:'.$URL.'loginpage.php?reg=99'); //błąd
         exit;
     }
     else
     {
         //echo "poprawnie utworzono konto";
-        header("location: loginpage.php?reg=1");
+        header('Location:'.$URL.'loginpage.php?reg=1');
         exit;
     }
 }
 else
 {
-    header("location: loginpage.php?reg=3");
+    header('Location:'.$URL.'loginpage.php?reg=3');
     exit;
 }
 ?>
