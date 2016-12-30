@@ -1,6 +1,6 @@
 <?php
 require_once "connect_to_db.php";
-require_once "logged_in_check.php";
+require_once "backend_logged_in_check.php";
 
 $retcode=0;
 try

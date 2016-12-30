@@ -7,3 +7,9 @@ deny from all
 </files>
 
 SetEnv DB_PASS_HASH 1456488529
+
+ErrorDocument 400 /error.php?id=400
+ErrorDocument 401 /error.php?id=401
+ErrorDocument 403 /error.php?id=403
+ErrorDocument 404 /error.php?id=404
+ErrorDocument 500 /error.php?id=500

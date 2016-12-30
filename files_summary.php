@@ -26,7 +26,7 @@
 </div>
 <div class="row">
     <div class="col-10-10">
-        <div class="innertube" id="div-table">
+        <div class="innertube" id="div-table1">
             <h2>Twoje pliki</h2>
 
             <table>
@@ -42,7 +42,7 @@
                     $id_user=mysqli_real_escape_string($DB_link,$_COOKIE['id_user']);
                     $data=mysqli_query($DB_link,"SELECT files.name AS filename, languages.name AS langname, id_file , path FROM files,languages WHERE languages.id_lang=files.id_lang AND files.id_user='$id_user'");
                     if(mysqli_num_rows($data)==0)
-                        echo "<h3>Brak plików!</h3>";
+                        echo "<td>Brak plików!</td>";
 
                     else
                     {
@@ -64,17 +64,18 @@
                 </tr>
             </table>
         </div>
+    </div>
 
-
-        <div class="innertube" id="div-table">
+    <div class="col-10-10" id="column-bottom">
+        <div class="innertube" id="div-table2">
             <h2>Udostępnione pliki</h2>
 
             <table>
                 <tr>
-                    <th>Nazwa:</th>
-                    <th>Język:</th>
-                    <th>Właściciel:</th>
-                    <th>Akcja:</th>
+                    <th width='70%'>Nazwa:</th>
+                    <th width='8%'  style="min-width: 10px">Język:</th>
+                    <th width='12%' style="min-width: 10px">Właściciel:</th>
+                    <th width='10%' style="min-width: 50px">Akcja:</th>
                 </tr>
                     <?php
                     try

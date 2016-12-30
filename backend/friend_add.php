@@ -1,6 +1,6 @@
 <?php
 require_once "connect_to_db.php";
-require_once "logged_in_check.php";
+require_once "backend_logged_in_check.php";
 
 $id_user=mysqli_real_escape_string($DB_link,$_COOKIE['id_user']);
 

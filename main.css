@@ -122,7 +122,9 @@ footer{
         margin-top:0;
     }
 
-    [class*="col-"] {
+    [class*="col-"]
+    {
+
     }
 
     /* set col widths */

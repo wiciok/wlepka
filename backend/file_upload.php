@@ -2,7 +2,7 @@
 
 require_once "connect_to_db.php";
 require_once "file_constants.php";
-require_once "logged_in_check.php";
+require_once "backend_logged_in_check.php";
 
 $ret_code=0;
 
@@ -59,14 +59,10 @@ if(isset($_FILES['file']) && !empty($_FILES['file']) && isset($_POST['lang_name'
                 $ret_code=1;
             }
             else
-            {
                 $ret_code=4;
-            }
         }
         else
-        {
             $ret_code=4;
-        }
     }
     else
         echo "plik nie zostal przeslany";

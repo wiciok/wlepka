@@ -1,5 +1,5 @@
 <link rel="stylesheet" type="text/css" href="innerpages.css">
-<!--<link rel="stylesheet" type="text/css" href="file_properties.css">-->
+<link rel="stylesheet" type="text/css" href="file_properties.css">
 
 <div id="div-alert">
     <div class="innertube">
@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-4-10">
+    <div class="col-4-10" id="col-left">
         <div class="innertube">
             <h2>Właściwości pliku</h2>
 
@@ -157,6 +157,7 @@
                         <th>Właściciel:</th>
                         <td><?php echo $file_owner; ?></td>
                     </tr>
+                    <tr><td><br></td></tr>
                     <tr>
                         <td colspan="2">
                             <input type="submit" name="edit" value="Edytuj">
@@ -173,13 +174,13 @@
 
         </div>
     </div>
-    <div class="col-3-10">
+    <div class="col-3-10" id="col-center">
         <div class="innertube">
             <h2>Udostępnienia</h2>
-            <table>
+            <table id="shares_table">
                 <tr>
-                    <th>Typ:</th>
-                    <th>Użytkownik:</th>
+                    <th width="80%"><h3>Typ:</h3></th>
+                    <th width="20%"><h3>Użytkownik:</h3></th>
                 </tr>
                 <?php
 
@@ -207,12 +208,11 @@
                         $id_permission=$row['id_permission'];
 
                         echo "<tr>";
-                        //echo "<td>".$row['permission_name']."</td>";
-                        echo "<td>".$dict[($row['permission_name'])]."</td>";
-                        echo "<td>".$row['login']."</td>";
+                        echo "<td class='data'>".$dict[($row['permission_name'])]."</td>";
+                        echo "<td class='data'>".$row['login']."</td>";
                         echo "</tr><tr>";
                         echo "<td colspan='2'>"."
-                        <form action='file_share_delete.php' method='post'>
+                        <form action='/backend/file_share_delete.php' method='post'>
                         <input type='text' name='id_user' style='display:none' value='$id_user'>
                         <input type='text' name='id_file' style='display: none' value='$id_file'>
                         <input type='text' name='id_permission' style='display:none' value='$id_permission'>
@@ -222,7 +222,7 @@
                     }
                 }
                 else
-                    echo "<tr></tr><td colspan='2'>"."brak udostępnień!"."</td></tr>";
+                    echo "<tr></tr><td colspan='2'>"."<h3>brak udostępnień!</h3>"."</td></tr>";
                 ?>
 
             </table>
@@ -230,7 +230,7 @@
         </div>
     </div>
 
-    <div class="col-3-10">
+    <div class="col-3-10" id="col-right">
         <div class="invisible-container">
             <datalist id="friends_logins_list">
                 <?php
@@ -278,7 +278,6 @@
 
                 <input name="id_file" value="<?php echo $id_file ?>" style="display: none">
                 <input name="id_user" value="<?php echo $id_user ?>" style="display: none">
-                <br>
                 <br>
                 <input id="submit-add-friend" type="submit" value="Udostępnij">
             </form>

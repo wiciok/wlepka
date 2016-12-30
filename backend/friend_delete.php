@@ -1,6 +1,6 @@
 <?php
 require_once "connect_to_db.php";
-require_once "logged_in_check.php";
+require_once "backend_logged_in_check.php";
 
 if(isset($_POST['id_user_1']) && !empty($_POST['id_user_1']) && isset($_POST['id_user_2']) && !empty($_POST['id_user_2'])) {
     $id_1 = mysqli_real_escape_string($DB_link, $_POST['id_user_1']);

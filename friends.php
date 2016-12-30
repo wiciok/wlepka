@@ -47,7 +47,7 @@
 
 <div class="row">
     <div id="left-column" class="col-7-10">
-        <div class="innertube" id="div-table">
+        <div class="innertube">
             <h2>Znajomi</h2>
             <table>
                 <?php

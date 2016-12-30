@@ -7,40 +7,6 @@ td{
     padding-right: 0.2em;
 }
 
-
-
 datalist{
     display: inherit;
-}
-
-input{
-    margin-top: 0.2em;
-    margin-bottom: 0.2em;
-    width: 100%;
-    height: 1.75em;
-    font-size: 1em;
-    font-family: 'Advent Pro';
-    border-radius: 5px;
-    border-width: 0;
-    padding-left: 0.4em;
-    padding-right: 0.4em;
-}
-
-
-input[type=submit] {
-    width: 100%;
-    padding:5px 15px;
-    height: 2.1em;
-
-    border:0 none;
-    cursor:pointer;
-    border-radius: 5px;
-    font-size: 0.8em;
-    font-family: 'Advent Pro';
-    color: white;
-    background: #5a9f33;
-}
-
-input[type=submit]:hover{
-    background: #3d7829;
 }

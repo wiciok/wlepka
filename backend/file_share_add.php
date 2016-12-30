@@ -1,7 +1,7 @@
 <?php
 
 require_once "connect_to_db.php";
-require_once "logged_in_check.php";
+require_once "backend_logged_in_check.php";
 
 
 function getPermissionId($DB_link, $perm_name) //tworzy jeśli potrzeba i zwraca id prawa dostępu x_user o danym shared_user_id
@@ -119,7 +119,7 @@ catch(Exception $e)
 
 finally
 {
-    header('Location:'.$URL.'mainpage.php?page=file_properties&id_file=".$id_file."&alert='.$retcode);
+    header('Location:'.$URL.'mainpage.php?page=file_properties&id_file='.$id_file.'&alert='.$retcode);
     exit;
 }
 

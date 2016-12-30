@@ -1,0 +1,36 @@
+#permission_type{
+    font-size: 0.8em;
+}
+
+table{
+    width: 100%;
+    text-align: left;
+}
+
+#shares_table .data{
+    font-size: 1.5em;
+}
+
+
+tr,th,td{
+    padding: 0.2em;
+    margin: 0;
+    font-size: 1em;
+}
+
+h3{
+    margin: 0;
+}
+
+#col-left{
+
+}
+
+#col-center{
+    min-width: 400px;
+}
+
+#col-right{
+    min-width: 280px;
+}
+

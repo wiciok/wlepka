@@ -2,60 +2,27 @@ td{
     padding: 0.2em;
 }
 
-
-input{
-    margin-top: 0.2em;
-    margin-bottom: 0.2em;
-    width: 100%;
-    height: 1.75em;
-    font-size: 1em;
-    font-family: 'Advent Pro';
-    border-radius: 5px;
-    border-width: 0;
-    padding-left: 0.4em;
-    padding-right: 0.4em;
-}
-
 input[type=submit] {
-    width: 100%;
-    padding:5px 15px;
-    height: 2.1em;
-
-    border:0 none;
-    cursor:pointer;
-    border-radius: 5px;
     font-size: 0.5em;
-    font-family: 'Advent Pro';
-    color: white;
-    background: #5a9f33;
 }
 
 #submit-add-friend{
     font-size: 1em;
 }
 
-input[type=submit]:hover{
-    background: #3d7829;
-}
 
 table{
     width: 100%;
     font-size: 1em;
 }
 
-
-
-#div-table{
-    overflow: auto;
+#left-column {
+    min-width: 600px;
 }
 
-/*table, thead, tbody, tr {
-    display: inline-block;
+#right-column{
+    min-width: 250px;
 }
-
-td, th{
-    display:inline-block;
-}*/
 
 
 /*todo: zmienic na zaleznosc od zageszczenia pikseli*/
@@ -64,30 +31,6 @@ td, th{
     table{
     font-size: 1.5em;
     }
-
-    /*reset ustawień tabeli do domyślnych:*/
-    /*table{
-        display: table;
-    }
-
-    thead {
-        display: table-header-group;
-    }
-
-    tbody {
-        display: table-row-group;
-    }
-
-    th {
-        display: table-cell;
-    }
-
-    td{
-        display: table-cell;
-    }
-    tr{
-        display: table-row;
-    }*/
 
 
     #submit-add-friend{
