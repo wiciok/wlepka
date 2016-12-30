@@ -17,6 +17,10 @@ if($_POST['delete'])
 {
     try
     {
+        mysqli_query($DB_link,"SET TRANSACTION ISOLATION LEVEL SERIALIZABLE");
+        mysqli_query($DB_link,"START TRANSACTION");
+
+
         $data=mysqli_query($DB_link,"SELECT path FROM files WHERE id_file='$id_file'");
         if(mysqli_num_rows($data)!=1)
             throw new mysqli_sql_exception("ilosc plikow o danym id rozna od 1");
@@ -49,12 +53,15 @@ if($_POST['delete'])
 
         if(mysqli_error($DB_link))
             throw new mysqli_sql_exception("blad usuwania zbednych uprawnien z bazy");
+
+        mysqli_query($DB_link,"COMMIT");
     }
 
     catch(Exception $e)
     {
         echo $e->getMessage();
         $retcode=1;
+        mysqli_query($DB_link,"ROLLBACK");
     }
 
     finally
@@ -67,6 +74,9 @@ if($_POST['delete'])
 //zmiana nazwy
 try
 {
+    mysqli_query($DB_link,"SET TRANSACTION ISOLATION LEVEL SERIALIZABLE");
+    mysqli_query($DB_link,"START TRANSACTION");
+
     if(isset($_POST['file_name']) && !empty($_POST['file_name']))
     {
         $new_file_name=mysqli_real_escape_string($DB_link,$_POST['file_name']);
@@ -102,12 +112,15 @@ try
 
     if(mysqli_errno($DB_link))
        throw new mysqli_sql_exception("Blad mysqli! ");
+
+    mysqli_query($DB_link,"COMMIT");
 }
 
 catch(Exception $e)
 {
     $retcode=6;
     echo $e->getMessage();
+    mysqli_query($DB_link,"ROLLBACK");
 }
 
 finally
