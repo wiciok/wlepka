@@ -41,7 +41,7 @@ if (isset($_COOKIE['id_user']) && isset($_COOKIE['token']) && isset($_COOKIE['ac
         else
         {
             //echo "przechwycona sesja";
-            header('Location: logout.php');
+            header('Location: '.$URL.'/backend/logout.php');
             exit;
         }
     }
