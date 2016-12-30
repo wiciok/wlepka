@@ -80,11 +80,34 @@
             }
             $row=mysqli_fetch_assoc($data);
 
-            if($row['id_user']!=$id_user)          //todo: mozna dorobic takze czy uzytkownik nie ma przyznanych uprawnien do pliku (albo przerobic w bazie danych)
+            if($row['id_user']!=$id_user)
             {
-                echo "Nie masz praw do tego pliku!";
-                //header("location: mainpage.php?page=file_properties&id_file=7&alert=4");
-                exit;
+                //sprawdzanie, czy plik został nam udostępniony
+                $data3=mysqli_query($DB_link,"
+                            SELECT permission_name, id_shared_user 
+                            FROM permissions, shares
+                            WHERE shares.id_permission=permissions.id_permission
+                            AND shares.id_file='$id_file';
+                            ");
+
+                $flag=0;
+                for($j=mysqli_num_rows($data3);$j>0;$j--)
+                {
+                    $row2=mysqli_fetch_assoc($data3);
+                    if($row2['permission_name']==='read_write_friends')
+                        $flag=1;
+                    if($row2['permission_name']==='read_write_user' && $row2['id_shared_user']===$id_user)
+                        $flag=1;
+                }
+
+
+                if($flag!=1)
+                {
+                    echo "Nie masz praw do tego pliku!";
+                    //header("location: mainpage.php?page=file_properties&id_file=7&alert=4");
+                    exit;
+                }
+
             }
 
             //wszystko jest ok:
