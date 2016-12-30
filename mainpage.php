@@ -41,7 +41,6 @@
                                 Uzytkownik:
                                 <?php
 
-                                //todo: usunac ta linijke nizej
                                 require_once "connect_to_db.php";
 
                                 if(isset($_COOKIE['id_user']))
@@ -50,7 +49,7 @@
                                     $row=mysqli_fetch_assoc(mysqli_query($DB_link,"select login from users where id_user='$id_user'"));
                                     echo htmlspecialchars($row['login']);
                                 }
-                                else //todo: dopracowac to/usunac
+                                else
                                 {
                                     echo "powinienes byc wylogowany";
                                 }

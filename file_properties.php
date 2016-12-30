@@ -29,6 +29,9 @@
                     case 7:
                         echo "Błąd usuwania udostępnienia!";
                         break;
+                    case 8:
+                        echo "Błąd dodawania udostępnienia!";
+                        break;
                     default:
                         echo "Niepoprawny kod komunikatu!";
                         break;
@@ -66,7 +69,6 @@
             $id_file=mysqli_real_escape_string($DB_link,$_GET['id_file']);
 
             //sprawdzenie, czy plik istnieje i czy należy do użytkownika
-
             $data=mysqli_query($DB_link, "
                 SELECT files.name as filename, files.id_user, files.id_lang, timestmp, users.login as login, languages.name as lang_name 
                 FROM files, users, languages 
@@ -100,14 +102,12 @@
                         $flag=1;
                 }
 
-
                 if($flag!=1)
                 {
                     echo "Nie masz praw do tego pliku!";
                     //header("location: mainpage.php?page=file_properties&id_file=7&alert=4");
                     exit;
                 }
-
             }
 
             //wszystko jest ok:
@@ -115,7 +115,6 @@
             $file_lang=$row['lang_name'];
             $file_timestmp=$row['timestmp'];
             $file_owner=$row['login'];
-
             ?>
 
             <form action="file_edit.php" method="POST">
