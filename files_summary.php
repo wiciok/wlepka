@@ -25,7 +25,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-10-10">
+    <div class="col-10-10" id="column-top">
         <div class="innertube" id="div-table1">
             <h2>Twoje pliki</h2>
 
@@ -51,7 +51,7 @@
                             $row=mysqli_fetch_assoc($data);
 
                             echo "<tr>";
-                            echo "<td width='70%'>"."<a target='_blank' href='".$row['path']."'>".$row['filename']."</a>"."</td>";
+                            echo "<td width='70%'>"."<a target='_blank' href='".$row['path']."'>".htmlspecialchars($row['filename'])."</a>"."</td>";
                             echo "<td width='15%'>".$row['langname']."</td>";
                             echo "<td width='15%'>";
                             echo "
@@ -117,7 +117,7 @@
                             $row=mysqli_fetch_assoc($data2);
 
                             echo "<tr>";
-                            echo "<td><a href='".$row['path']."'>".$row['filename']."</a></td>";
+                            echo "<td><a href='".$row['path']."'>".htmlspecialchars($row['filename'])."</a></td>";
                             echo "<td>".$row['langname']."</td>";
                             echo "<td>".$row['owner']."</td>";
 

@@ -21,7 +21,7 @@ if(isset($_FILES['file']) && !empty($_FILES['file']) && isset($_POST['lang_name'
     $target_file = $FILE_TARGET_DIR . basename($file_name);
     $uploadOk = 1;
 
-    $filename_pattern = '/^[\p{L}\p{N}_ ,\.]{1,255}$/u'; //todo:mozna to dopracowac
+    $filename_pattern = '/^[\p{L}\p{N}_ ,\.]{1,255}$/u';
     if(!preg_match($filename_pattern,$file_name))
     {
         $ret_code=6;
@@ -42,6 +42,23 @@ if(isset($_FILES['file']) && !empty($_FILES['file']) && isset($_POST['lang_name'
         $ret_code=3;
     }
 
+    if($uploadOk==1)
+    {
+        //sprawdzenie rzeczywistego typu pliku
+        $accepted_mime_content_types=["text/plain","text/javascript","text/html"];
+        $uploadOk=0;
+        $ret_code=7;
+        foreach($accepted_mime_content_types as $element)
+        {
+            //echo $element."<br>";
+            //echo mime_content_type($_FILES["file"]["tmp_name"]);
+            if(mime_content_type($_FILES["file"]["tmp_name"])==$element)
+            {
+                $uploadOk=1;
+                $ret_code=1;
+            }
+        }
+    }
 
     if ($uploadOk == 1)
     {
@@ -66,6 +83,7 @@ if(isset($_FILES['file']) && !empty($_FILES['file']) && isset($_POST['lang_name'
     }
     else
         echo "plik nie zostal przeslany";
+    //echo mime_content_type($target_file);
 }
 else
 {

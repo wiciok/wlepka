@@ -29,6 +29,9 @@
                     case 6:
                         echo "Błąd podczas próby przesyłania pliku!"."<br>"."Niepoprawna nazwa pliku!";
                         break;
+                    case 7:
+                        echo "Błąd podczas próby przesyłania pliku!"."<br>"."Plik nie jest plikiem tekstowym!";
+                        break;
                     default:
                         echo "Niepoprawny kod komunikatu!";
                         break;
@@ -41,6 +44,18 @@
 
 <div class="row">
     <script>
+        function escapeHtml(text) {
+            var map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+
+            return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+        }
+
         function checkSubmitButton()
         {
             function col1() {document.getElementById('send').style.backgroundColor="#3d7829"}
@@ -51,7 +66,7 @@
                 col2();
                 document.getElementById('send').addEventListener("mouseover",col1);
                 document.getElementById('send').addEventListener("mouseout",col2);
-                document.getElementById('filename_shower').value=document.getElementById('file_checker').value;
+                document.getElementById('filename_shower').value=escapeHtml(document.getElementById('file_checker').value);
                 document.getElementById('button_add_file').style.display='none';
                 document.getElementById('filename_shower').style.display='inherit';
             }

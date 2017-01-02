@@ -11,6 +11,15 @@ h2{
     display:none;
 }
 
+#column-top a,#column-bottom a{
+    color: white;
+}
+
+#column-top a:hover,#column-bottom a:hover{
+    text-decoration: underline;
+}
+
+
 
 input{
     margin-top: 0.2em;

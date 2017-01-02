@@ -88,15 +88,16 @@
                         ?>
                     </h3>
                 </div>
+                <script src="registration_check_ajax.js"></script>
                 <form method="post" action="backend/registration.php" name="registrationForm">
                     Imię:<br>
                     <input type="text" name="name" class="input_text"><br>
                     Nazwisko:<br>
                     <input type="text" name="surname" class="input_text"><br>
                     Login:<br>
-                    <input type="text" name="login" class="input_text"><br>
+                    <input type="text" name="login" id="input-login" class="input_text" onblur="checkInDatabase('login',this.value)"><br>
                     Hasło:<br>
-                    <input type="password" name="password" class="input_text"><br>
+                    <input type="password" name="password" id="input-password" class="input_text" onblur="checkInDatabase('password',this.value)"><br>
                     <br>
                     <input type="submit" id="register-submit" value="Wyślij">
                 </form>
