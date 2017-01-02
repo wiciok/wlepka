@@ -262,6 +262,8 @@
                 {
                     if(document.getElementById('permission_type').value=='read_user' || document.getElementById('permission_type').value=='read_write_user')
                         document.getElementById("login_list").style.display='inherit';
+                    else
+                        document.getElementById("login_list").style.display='none';
                 }
             </script>
 

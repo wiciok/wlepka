@@ -10,6 +10,7 @@ $DB_port="3306";
 
 $SALT='27061416004965837613';
 
-$URL='http://localhost/';
+//$URL='http://localhost/';
+$URL='http://'.$_SERVER['SERVER_ADDR'].'/';
 
 ?>
