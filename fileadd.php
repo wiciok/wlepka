@@ -56,20 +56,42 @@
             return text.replace(/[&<>"']/g, function(m) { return map[m]; });
         }
 
-        function checkSubmitButton()
+        function col1()
         {
-            function col1() {document.getElementById('send').style.backgroundColor="#3d7829"}
-            function col2(){document.getElementById('send').style.backgroundColor="#5a9f33"}
+            document.getElementById('send').style.backgroundColor='#3d7829'
+        }
+        function col2()
+        {
+            document.getElementById('send').style.backgroundColor='#5a9f33'
+        }
 
+        function resetControls()
+        {
+            document.getElementById('send').style.backgroundColor='#707070';
+            document.getElementById('send').removeEventListener('mouseover',col1);
+            document.getElementById('send').removeEventListener('mouseout',col2);
+            document.getElementById('send').disabled=true;
+            document.getElementById('filename_shower').style.display='none';
+            document.getElementById('file_checker').value='';
+            document.getElementById('file_checker').click();
+        }
+
+        function checkSubmitButtonAfterSelection()
+        {
             if(document.getElementById('file_checker').value != '' && document.getElementById("select_lang").value!='not_chosen')
             {
                 col2();
-                document.getElementById('send').addEventListener("mouseover",col1);
-                document.getElementById('send').addEventListener("mouseout",col2);
-                document.getElementById('filename_shower').value=escapeHtml(document.getElementById('file_checker').value);
-                document.getElementById('button_add_file').style.display='none';
-                document.getElementById('filename_shower').style.display='inherit';
+                document.getElementById('send').addEventListener('mouseover',col1);
+                document.getElementById('send').addEventListener('mouseout',col2);
+                document.getElementById('send').disabled=false;
+                clearInterval(check);
             }
+        }
+
+        function updateFilenameShower()
+        {
+            document.getElementById('filename_shower').value=escapeHtml(document.getElementById('file_checker').value);
+            document.getElementById('filename_shower').style.display='inherit';
         }
     </script>
 
@@ -81,11 +103,11 @@
             <input type="file" name="file" id="file_checker" style="display: none">
 
             <input type="text" value="wybierz plik..." readonly id="filename_shower">
-            <button id="button_add_file" onclick="document.getElementById('file_checker').click()">Wybierz plik</button>
+            <button id="button_add_file" onclick="resetControls(); check=setInterval(function(){updateFilenameShower()},1000)">Wybierz plik</button>
             <br><br>
             Wybierz język:<br>
-            <select name="lang_name" id="select_lang" onchange="checkSubmitButton()">
-                <option value="not_chosen" selected="true" disabled="disabled">-wybierz-</option>
+            <select name="lang_name" id="select_lang" onchange="checkSubmitButtonAfterSelection()">
+                <option value="not_chosen" selected="selected" disabled="disabled">-wybierz-</option>
                 <?php
                 require_once "backend/connect_to_db.php";
 
@@ -101,7 +123,7 @@
                 ?>
             </select>
             <br>
-            <input type="submit" value="Prześlij" name="submit" id="send">
+            <input type="submit" value="Prześlij" name="submit" id="send" disabled="disabled">
         </form>
     </div>
 </div>
