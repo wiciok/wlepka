@@ -16,6 +16,7 @@
     background-color: darkred;
     padding:0.5em;
     padding-left: 1em; /*do ew. usuniecia*/
+    /*min-width: 160px;*/
 }
 
 nav ul{
@@ -35,7 +36,7 @@ nav li{
     background-color: orangered;
     text-align: center;
     padding: 0.4em;
-    border-radius: 5px;
+    border-radius: 0.2em;
     width: 100%;
     border-width: 0;
     color: white;

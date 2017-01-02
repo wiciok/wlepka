@@ -15,7 +15,7 @@ if (isset($_COOKIE['id_user']) && isset($_COOKIE['token']) && isset($_COOKIE['ac
 
     if(mysqli_num_rows($data)!=1)
     {
-        header("location: logout.php");
+        header("location: ".$URL."backend/logout.php");
     }
     else //dane sie zgadzają
     {

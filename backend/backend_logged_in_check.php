@@ -15,7 +15,7 @@ if (isset($_COOKIE['id_user']) && isset($_COOKIE['token']) && isset($_COOKIE['ac
 
     if(mysqli_num_rows($data)!=1)
     {
-        header("location: logout.php");
+        header('Location:'.$URL.'backend/logout.php');
     }
     else //dane sie zgadzają
     {
@@ -34,7 +34,7 @@ if (isset($_COOKIE['id_user']) && isset($_COOKIE['token']) && isset($_COOKIE['ac
         else
         {
             //echo "przechwycona sesja";
-            header('Location: logout.php');
+            header('Location:'.$URL.'backend/logout.php');
             exit;
         }
     }

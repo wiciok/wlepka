@@ -66,7 +66,7 @@
                         <th>Login:</th>
                         <th>Imie:</th>
                         <th>Nazwisko:</th>
-                        <th>Status znajomości:</th>
+                        <th>Status:</th>
                         <th></th>
                     </tr>";
 
@@ -104,7 +104,7 @@
 
                         if($status=='unconfirmed' && $id1!=$id_user) //sytaucja kiedy nie jest potwierdzona znajomość i jesteśmy userem który został zaproszony
                         {
-                            echo "Znajomość niepotwierdzona"."</td>";
+                            echo "Potwierdzona"."</td>";
                             echo "
                             <td>
                                 <form action=backend/friend_confirm.php method='post'>
@@ -118,9 +118,9 @@
                         else
                         {
                             if($status=='unconfirmed')
-                                echo "Znajomość niepotwierdzona"."</td>";
+                                echo "Niepotwierdzona"."</td>";
                             else
-                                echo "Znajomość potwierdzona"."</td>";
+                                echo "Potwierdzona"."</td>";
 
                             echo "
                             <td>
