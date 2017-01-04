@@ -52,6 +52,14 @@ nav li{
     background-color: #CA0000;
 }
 
+#admin-div-but{
+    background-color: #1018ff;
+}
+
+#admin-div-but:hover{
+    background-color: #0f17ca;
+}
+
 #column-center{
     background-color: #94da4d;
 }

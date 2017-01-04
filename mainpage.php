@@ -37,6 +37,21 @@
         <div id="column-left" class="col-2-10">
             <nav>
                 <ul>
+                    <?php
+                    require_once "./admin/admin_check.php";
+
+                    if(admin_check($DB_link))
+                    {
+                        echo"
+                        <li>
+                            <a href='admin/admin_summary.php'>
+                                <div class='div-but-menu-position' id='admin-div-but'>
+                                    Admin panel
+                                </div>
+                            </a>
+                        </li>";
+                    }
+                    ?>
                     <li>
                         <a href="mainpage.php?page=profile_show&id_user=<?php echo htmlspecialchars($_COOKIE['id_user']); ?>">
                             <div class="div-but-menu-position">
