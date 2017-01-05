@@ -16,8 +16,8 @@ table{
     font-size: 1em;
 }
 
-#left-column {
-    min-width: 600px;
+#friends-innertube{
+    overflow: auto;
 }
 
 #right-column{

@@ -47,9 +47,9 @@
 
 <div class="row">
     <div id="left-column" class="col-7-10">
-        <div class="innertube">
+        <div class="innertube" id="friends-innertube">
             <h2>Znajomi</h2>
-            <table>
+            <table id='friends-table'>
                 <?php
                 require_once "backend/connect_to_db.php";
 

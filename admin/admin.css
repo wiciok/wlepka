@@ -110,6 +110,12 @@ input[type=submit] {
     font-family: "Poiret One";
 }
 
+.row,[class*="col-"],table,body,.innertube{
+    overflow:auto;
+}
+
+
+
 
 footer span{
     font-size: 0.5em;
