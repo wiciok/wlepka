@@ -1,7 +1,9 @@
-#todo: zrobic tak zeby nie dalo sie wejsc po chamsku z przegladarki, ale zeby dzialalo w aplikacji
-
 deny from all
 #allow from 127.0.0.1
+
+<files *.*>
+deny from all
+</files>
 
 
 <files error.php>

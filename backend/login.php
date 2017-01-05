@@ -33,7 +33,8 @@ if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password'])
 
         $id_user=$row['id_user'];
 
-        //todo: byc moze do usuniecia (wtedy: dorobic czyszczenie sesji w sytuacji gdy usunieto cookies albo zostawic zeby zrobil to czyszczacy event)
+        // byc moze do usuniecia (wtedy: dorobic czyszczenie sesji w sytuacji gdy usunieto cookies albo zostawic zeby zrobil to czyszczacy event)
+
         //wymuszenie usuniecia ew. innych sesji uzytkownika
         mysqli_query($DB_link,"CALL pForceRemoveSession('$login');");
 

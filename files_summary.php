@@ -51,7 +51,8 @@
                             $row=mysqli_fetch_assoc($data);
 
                             echo "<tr>";
-                            echo "<td width='70%'>"."<a target='_blank' href='".$row['path']."'>".htmlspecialchars($row['filename'])."</a>"."</td>";
+                            //echo "<td width='70%'>"."<a target='_blank' href='".$row['path']."'>".htmlspecialchars($row['filename'])."</a>"."</td>";
+                            echo "<td width='70%'>"."<a href='backend/download_file.php?id_file=".$row['id_file']."'>".htmlspecialchars($row['filename'])."</a>"."</td>";
                             echo "<td width='15%'>".htmlspecialchars($row['langname'])."</td>";
                             echo "<td width='15%'>";
                             echo "
@@ -106,7 +107,7 @@
                             $id_file=$row['id_file'];
 
                             $data2=mysqli_query($DB_link,"
-                            SELECT path, files.name AS filename, languages.name AS langname, users.login AS owner 
+                            SELECT id_file, path, files.name AS filename, languages.name AS langname, users.login AS owner 
                             FROM files 
                             LEFT JOIN users ON files.id_user=users.id_user 
                             LEFT JOIN languages ON files.id_lang=languages.id_lang 
@@ -117,7 +118,7 @@
                             $row=mysqli_fetch_assoc($data2);
 
                             echo "<tr>";
-                            echo "<td><a href='".$row['path']."'>".htmlspecialchars($row['filename'])."</a></td>";
+                            echo "<td><a href='backend/download_file.php?id_file=".$row['id_file']."'>".htmlspecialchars($row['filename'])."</a></td>";
                             echo "<td>".htmlspecialchars($row['langname'])."</td>";
                             echo "<td>".htmlspecialchars($row['owner'])."</td>";
 

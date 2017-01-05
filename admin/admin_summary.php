@@ -98,7 +98,7 @@ require_once "../backend/connect_to_db.php";
 
                         echo "<tr>";
                         echo "<td>".htmlspecialchars($row['id_file'])."</td>";
-                        echo "<td><a href='".htmlspecialchars($row['path'])."'>".htmlspecialchars($row['name'])."</a></td>";
+                        echo "<td><a href='".$URL.'backend/download_file.php?id_file='.$row['id_file']."'>".htmlspecialchars($row['name'])."</a></td>";
                         echo "<td>".htmlspecialchars($row['langname'])."</td>";
                         echo "<td>".htmlspecialchars($row['timestmp'])."</td>";
                         echo "<td>".htmlspecialchars($row['shares_num'])."</td>";

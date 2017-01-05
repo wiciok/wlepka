@@ -2,7 +2,6 @@
 require_once "connect_to_db.php";
 require_once "backend_logged_in_check.php";
 
-//todo: usuwanie cudzego pliku
 if(!(isset($_POST['id_file']) && !empty($_POST['id_file']) && isset($_POST['id_user']) && !empty($_POST['id_user'])))
 {
     echo "Blad! Nie przeslano id_file lub id_user!";
