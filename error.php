@@ -42,11 +42,9 @@ require_once "my_header.html";
 </main>
 
 <footer>
-    <div id="footer">
-        <div class="innertube">
-            <p>Witold Karaś 2016<br></p>
-        </div>
-    </div>
+    <?php
+    require_once "my_footer.php";
+    ?>
 </footer>
 
 

@@ -146,17 +146,22 @@
 
             </div>
         </div>
-
-
     </div>
+    <div id="div-cookie-info">
+        <h3>
+            Strona korzysta z plików cookies w celu umożliwienia logowania.
+            <br>W ciasteczkach nie są przechowywane żadne dane osobiste użytkownika.
+            <br><br>
+            <b style="cursor: pointer" onclick="document.getElementById('div-cookie-info').style.display='none'">Zamknij</b>
+        </h3>
+    </div>
+    <br>
 </main>
 
 <footer>
-    <div id="footer">
-        <div class="innertube">
-            <p>Witold Karaś 2016</p>
-        </div>
-    </div>
+    <?php
+    require_once "my_footer.php";
+    ?>
 </footer>
 
 

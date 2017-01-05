@@ -120,12 +120,3 @@ input[type=submit] {
 #column-right{
     background-color: orangered;
 }
-
-footer span{
-    font-size: 0.5em;
-    text-align: right;
-}
-
-footer span:hover{
-    text-decoration: underline;
-}

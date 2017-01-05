@@ -120,7 +120,7 @@ try
 
     $retcode=5;
 
-    sleep(30);
+    //sleep(10);
     mysqli_query($DB_link,"COMMIT");
 }
 

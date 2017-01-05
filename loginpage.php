@@ -155,13 +155,9 @@
 </main>
 
 <footer>
-    <div id="footer">
-        <div class="innertube">
-            <p>Witold Karaś 2016<br>
-                <span style="cursor: pointer" onclick="document.getElementById('div-cookie-info').style.display='inherit'">Informacje o cookies</span>
-            </p>
-        </div>
-    </div>
+    <?php
+    require_once "my_footer.php";
+    ?>
 </footer>
 
 
