@@ -72,7 +72,7 @@ if(isset($_POST['country']) && !empty($_POST['country']))
     {
         mysqli_query($DB_link,"INSERT INTO countries(name) VALUES('$country_name')");
     }
-    mysqli_query($DB_link,"UPDATE users SET id_country=(SELECT id_country FROM countries WHERE name='$country_name')");
+    mysqli_query($DB_link,"UPDATE users SET id_country=(SELECT id_country FROM countries WHERE name='$country_name') WHERE id_user='$logged_id_user'");
 
 }
 

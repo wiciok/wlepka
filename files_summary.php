@@ -52,7 +52,7 @@
 
                             echo "<tr>";
                             echo "<td width='70%'>"."<a target='_blank' href='".$row['path']."'>".htmlspecialchars($row['filename'])."</a>"."</td>";
-                            echo "<td width='15%'>".$row['langname']."</td>";
+                            echo "<td width='15%'>".htmlspecialchars($row['langname'])."</td>";
                             echo "<td width='15%'>";
                             echo "
                             <a href='mainpage.php?page=file_properties&id_file=".$row['id_file']."'><button>Właściwości</button>                            
@@ -118,8 +118,8 @@
 
                             echo "<tr>";
                             echo "<td><a href='".$row['path']."'>".htmlspecialchars($row['filename'])."</a></td>";
-                            echo "<td>".$row['langname']."</td>";
-                            echo "<td>".$row['owner']."</td>";
+                            echo "<td>".htmlspecialchars($row['langname'])."</td>";
+                            echo "<td>".htmlspecialchars($row['owner'])."</td>";
 
                             $data3=mysqli_query($DB_link,"
                             SELECT permission_name, id_shared_user 

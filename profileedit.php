@@ -78,7 +78,7 @@
                             while($num_rows>0)
                             {
                                 $row=mysqli_fetch_assoc($data);
-                                echo htmlspecialchars('<option value='.$row['name'].'>');
+                                echo '<option value='.htmlspecialchars($row['name']).'>';
                                 $num_rows--;
                             }
                             ?>

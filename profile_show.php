@@ -20,21 +20,21 @@
                 else
                 {
                     $logged_user_row=mysqli_fetch_assoc($data);
-                    echo "<h3>Imię:&nbsp &nbsp".$logged_user_row['name']." </h3>";
-                    echo "<h3>Nazwisko:&nbsp &nbsp".$logged_user_row['surname']." </h3>";;
-                    echo "<h3>Login:&nbsp &nbsp".$logged_user_row['login']." </h3>";;
+                    echo "<h3>Imię:&nbsp &nbsp".htmlspecialchars($logged_user_row['name'])." </h3>";
+                    echo "<h3>Nazwisko:&nbsp &nbsp".htmlspecialchars($logged_user_row['surname'])." </h3>";;
+                    echo "<h3>Login:&nbsp &nbsp".htmlspecialchars($logged_user_row['login'])." </h3>";;
 
 
                     $id_country=$logged_user_row['id_country'];
                     $row=mysqli_fetch_assoc(mysqli_query($DB_link,"select name from countries where countries.id_country='$id_country'"));
 
-                    echo "<h3>Kraj:&nbsp &nbsp".$row['name']." </h3>";;
+                    echo "<h3>Kraj:&nbsp &nbsp".htmlspecialchars($row['name'])." </h3>";;
 
                     if(!empty($logged_user_row['birth_date']))
-                        echo "<h3>Data urodzenia:&nbsp &nbsp".$logged_user_row['birth_date']." </h3>";
+                        echo "<h3>Data urodzenia:&nbsp &nbsp".htmlspecialchars($logged_user_row['birth_date'])." </h3>";
 
                     if(!empty($logged_user_row['city']))
-                        echo "<h3>Miasto:&nbsp &nbsp".$logged_user_row['city']." </h3>";
+                        echo "<h3>Miasto:&nbsp &nbsp".htmlspecialchars($logged_user_row['city'])." </h3>";
                 }
             }
 

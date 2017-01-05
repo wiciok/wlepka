@@ -8,6 +8,9 @@ header, #footer{
     background: #0f17ca;
 }
 
+#column-center{
+    background-color: #2b2cff;
+}
 #column-right{
     background-color: #2b2cff;
 }
@@ -116,3 +119,13 @@ footer span{
 footer span:hover{
     text-decoration: underline;
 }
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+

@@ -78,9 +78,9 @@ try
 {
     mysqli_query($DB_link,"SET autocommit=0;");
     mysqli_query($DB_link,"SET TRANSACTION ISOLATION LEVEL SERIALIZABLE");
-    //mysqli_query($DB_link,"START TRANSACTION READ WRITE");
-    if(!mysqli_begin_transaction($DB_link))
-        throw new Exception("transakcja nie wystartowała!");
+    mysqli_query($DB_link,"START TRANSACTION READ WRITE");
+    //if(!mysqli_begin_transaction($DB_link))
+    //    throw new Exception("transakcja nie wystartowała!");
 
     if(isset($_POST['file_name']) && !empty($_POST['file_name']))
     {

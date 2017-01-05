@@ -118,13 +118,13 @@
             ?>
 
             <form action="backend/file_edit.php" method="POST">
-                <input type="text" name="id_file" value="<?php echo "$id_file"; ?>" style="display: none">
-                <input type="text" name="id_user" value="<?php echo "$id_user"; ?>" style="display: none">
+                <input type="text" name="id_file" value="<?php echo $id_file; ?>" style="display: none">
+                <input type="text" name="id_user" value="<?php echo $id_user; ?>" style="display: none">
                 <table>
                     <tr>
                         <th>Nazwa:</th>
                         <td>
-                            <input type="text" name="file_name" placeholder="<?php echo $file_name; ?>">
+                            <input type="text" name="file_name" placeholder="<?php echo htmlspecialchars($file_name); ?>">
                         </td>
                     </tr>
                     <tr>
@@ -140,9 +140,9 @@
                                 {
                                     $row=mysqli_fetch_assoc($data);
                                     if($row['name']==$file_lang)
-                                        echo '<option selected="true">'.$row['name'].'</option>';
+                                        echo '<option selected="selected">'.htmlspecialchars($row['name']).'</option>';
                                     else
-                                        echo '<option>'.$row['name'].'</option>';
+                                        echo '<option>'.htmlspecialchars($row['name']).'</option>';
                                     $num_rows--;
                                 }
                                 ?>
@@ -151,11 +151,11 @@
                     </tr>
                     <tr>
                         <th>Data dodania:</th>
-                        <td><?php echo $file_timestmp; ?></td>
+                        <td><?php echo htmlspecialchars($file_timestmp); ?></td>
                     </tr>
                     <tr>
                         <th>Właściciel:</th>
-                        <td><?php echo $file_owner; ?></td>
+                        <td><?php echo htmlspecialchars($file_owner); ?></td>
                     </tr>
                     <tr><td><br></td></tr>
                     <tr>
@@ -209,7 +209,7 @@
 
                         echo "<tr>";
                         echo "<td class='data'>".$dict[($row['permission_name'])]."</td>";
-                        echo "<td class='data'>".$row['login']."</td>";
+                        echo "<td class='data'>".htmlspecialchars($row['login'])."</td>";
                         echo "</tr><tr>";
                         echo "<td colspan='2'>"."
                         <form action='/backend/file_share_delete.php' method='post'>
@@ -248,7 +248,7 @@
                 while($num_rows>0)
                 {
                     $row=mysqli_fetch_assoc($data);
-                    echo "<option value='".$row['login']."'>".$row['login']."</option>";
+                    echo "<option value='".htmlspecialchars($row['login'])."'>".htmlspecialchars($row['login'])."</option>";
                     $num_rows--;
                 }
                 ?>

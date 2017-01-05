@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- dla IE na WP -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>Wlepka - aplikacja do dzielenia się kodami źródłowymi i plikami tekstowymi</title>
-    <link rel="stylesheet" type="text/css" href="main.css">
-    <link rel="stylesheet" type="text/css" href="loginpage.css">
+    <link rel="stylesheet" type="text/css" href="<?php require_once "backend/connection_data.php"; echo $URL.'main.css';?>">
+    <link rel="stylesheet" type="text/css" href="<?php require_once "backend/connection_data.php"; echo $URL.'loginpage.css';?>">
 
 
     <style>
@@ -27,14 +27,6 @@ require_once "my_header.html";
             <div class="innertube">
                 <h2>Wlepka - aplikacja do dzielenia się kodami źródłowymi i plikami tekstowymi</h2>
                 <br>
-                <div id="div-cookie-info">
-                    <h3>
-                        Strona korzysta z plików cookies w celu umożliwienia logowania.
-                        <br>W ciasteczkach nie są przechowywane żadne dane osobiste użytkownika.
-                        <br><br>
-                        <b style="cursor: pointer" onclick="document.getElementById('div-cookie-info').style.display='none'">Zamknij</b>
-                    </h3>
-                </div>
             </div>
         </div>
         <div class="col-6-10">
@@ -52,9 +44,7 @@ require_once "my_header.html";
 <footer>
     <div id="footer">
         <div class="innertube">
-            <p>Witold Karaś 2016<br>
-                <span style="cursor: pointer" onclick="document.getElementById('div-cookie-info').style.display='inherit'">Informacje o cookies</span>
-            </p>
+            <p>Witold Karaś 2016<br></p>
         </div>
     </div>
 </footer>
