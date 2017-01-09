@@ -11,6 +11,45 @@ if(!(isset($_POST['id_file']) && !empty($_POST['id_file']) && isset($_POST['id_u
 $id_file=mysqli_real_escape_string($DB_link,$_POST['id_file']);
 $id_user=mysqli_real_escape_string($DB_link,$_POST['id_user']);
 
+//sprawdzamy, czy plik należy do nas
+$data=mysqli_query($DB_link, "
+    SELECT files.name as filename, files.id_user, files.id_lang, timestmp, users.login as login, languages.name as lang_name 
+    FROM files, users, languages 
+    WHERE id_file='$id_file' AND languages.id_lang=files.id_lang AND users.id_user=files.id_user");
+
+if(mysqli_num_rows($data)!=1)
+{
+    //plik nie należy do nas, ale
+    //sprawdzamy czy mamy uprawnienia do edycji pliku
+    $data2=mysqli_query($DB_link,"
+    SELECT id_file FROM shares, friends     /*read/write friends*/
+    WHERE 
+      (
+        (shares.id_user=friends.id_user_1 AND friends.id_user_2='$id_user')
+        OR (shares.id_user=friends.id_user_2 AND friends.id_user_1='$id_user')
+      ) 
+     AND friends.status='confirmed' 
+     AND shares.id_permission=2
+     AND shares.id_file='$id_file'
+      
+    UNION   /*read/write user*/
+      SELECT id_file FROM shares, permissions 
+      WHERE shares.id_permission=permissions.id_permission 
+      AND permission_name='read_write_user'
+      AND id_shared_user='$id_user'
+      AND shares.id_file='$id_file'
+    ");
+
+    if(mysqli_num_rows($data2)!=1)
+    {
+        echo "Nie masz uprawnien do edycji tego pliku!";
+        exit;
+    }
+}
+
+
+
+
 //usuwanie pliku
 if($_POST['delete'])
 {
@@ -97,7 +136,7 @@ try
             throw new Exception("Blad podczas fizycznej zmiany nazwy pliku");
 
         mysqli_query($DB_link,"UPDATE files SET name='$new_file_name' WHERE id_file='$id_file'");
-        $new_path="uploaded_files/".$owner."/".$new_file_name;
+        $new_path="../uploaded_files/".$owner."/".$new_file_name;
         mysqli_query($DB_link,"UPDATE files SET path='$new_path' WHERE id_file='$id_file'");
     }
 

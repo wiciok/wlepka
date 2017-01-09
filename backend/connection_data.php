@@ -1,6 +1,7 @@
 <?php
 
 $DB_database_host="localhost";
+//$DB_database_host="149.156.136.151";
 $DB_login="wkaras";
 //$DB_password="password";
 $DB_password=sha1(getenv('DB_PASS_HASH')."fjkghnuire9ph4389ut-8gqrehjg3nbrqit435=8th1qg"."password");

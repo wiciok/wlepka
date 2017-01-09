@@ -97,7 +97,23 @@
                 {
                     $row2=mysqli_fetch_assoc($data3);
                     if($row2['permission_name']==='read_write_friends')
-                        $flag=1;
+                    {
+                        //sprawdzanie czy jesteśmy znajomymi właściciela pliku
+                        $data4=mysqli_query($DB_link,"
+                        SELECT id_file FROM shares, friends     /* read/write friends */
+                        WHERE
+                        (
+                            (shares.id_user=friends.id_user_1 AND friends.id_user_2='$id_user')
+                            OR (shares.id_user=friends.id_user_2 AND friends.id_user_1='$id_user')
+                        )
+                        AND friends.status='confirmed'
+                        AND shares.id_permission=2
+                        AND shares.id_file='$id_file'");
+
+                        if(mysqli_num_rows($data4)==1)
+                            $flag=1;
+                    }
+
                     if($row2['permission_name']==='read_write_user' && $row2['id_shared_user']===$id_user)
                         $flag=1;
                 }
