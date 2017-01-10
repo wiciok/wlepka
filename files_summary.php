@@ -52,7 +52,7 @@
 
                             echo "<tr>";
                             //echo "<td width='70%'>"."<a target='_blank' href='".$row['path']."'>".htmlspecialchars($row['filename'])."</a>"."</td>";
-                            echo "<td width='70%'>"."<a href='backend/download_file.php?id_file=".$row['id_file']."'>".htmlspecialchars($row['filename'])."</a>"."</td>";
+                            echo "<td width='70%'>"."<a href='file_view.php?id_file=".$row['id_file']."'>".htmlspecialchars($row['filename'])."</a>"."</td>";
                             echo "<td width='15%'>".htmlspecialchars($row['langname'])."</td>";
                             echo "<td width='15%'>";
                             echo "
@@ -118,7 +118,7 @@
                             $row=mysqli_fetch_assoc($data2);
 
                             echo "<tr>";
-                            echo "<td><a href='backend/download_file.php?id_file=".$row['id_file']."'>".htmlspecialchars($row['filename'])."</a></td>";
+                            echo "<td><a href='file_view.php?id_file=".$row['id_file']."'>".htmlspecialchars($row['filename'])."</a></td>";
                             echo "<td>".htmlspecialchars($row['langname'])."</td>";
                             echo "<td>".htmlspecialchars($row['owner'])."</td>";
 

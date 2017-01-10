@@ -142,6 +142,9 @@ footer{
     .col-8-10 {
         width: 80%;
     }
+    .col-85-10 {
+        width: 85%;
+    }
     .col-3-10 {
         width: 30%;
     }
