@@ -13,6 +13,8 @@ function download_file($file)
         header('Cache-Control: must-revalidate');
         header('Pragma: public');
         header('Content-Length: ' . filesize($file));
+        ob_clean();
+        flush();
         readfile($file);
         exit;
     }

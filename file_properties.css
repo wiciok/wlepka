@@ -7,6 +7,10 @@ table{
     text-align: left;
 }
 
+button {
+    font-size: 1.2em;
+}
+
 #shares_table .data{
     font-size: 1.5em;
 }
@@ -20,10 +24,13 @@ tr,th,td{
 
 
 #col-left{
-
+    min-width: 400px;
+}
+#col-center-left{
+    min-width: 200px;
 }
 
-#col-center{
+#col-center-right{
     min-width: 400px;
 }
 

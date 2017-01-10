@@ -50,6 +50,92 @@ if(mysqli_num_rows($data)!=1)
 
 
 
+//przesyłanie nowej wersji pliku
+if($_POST['new-file'])
+{
+    require_once "file_constants.php";
+    $ret_code=0;
+
+    if(mysqli_num_rows($data)==1)
+    {
+        $row=mysqli_fetch_assoc($data);
+        $file_name=$row['filename'];
+    }
+    else
+    {
+        echo "plik o danym id nie istnieje, a ten kod nie powinien w ogóle się wykonać";
+        exit;
+    }
+
+    $uploadOk=1;
+    if(!(isset($_FILES['file']) && !empty($_FILES['file'])))
+    {
+        $uploadOk=0;
+        $ret_code=9;
+        echo "nie przesłany plik!";
+    }
+    else
+    {
+        $FILE_TARGET_DIR = "../uploaded_files/" . $id_user . "/";
+
+        if (!file_exists($FILE_TARGET_DIR)) {
+            echo "folder nie istnieje, co teretycznie nie powinno sie zdarzyć!";
+            mkdir($FILE_TARGET_DIR, 0755, true);
+        }
+        $target_file = $FILE_TARGET_DIR . $file_name;
+
+        if (!file_exists($target_file)) {
+            echo "edytowany plik nie istnieje, więc ten kod nie powinien nigdy się wykonać";
+            exit;
+        }
+
+        if ($_FILES['file']['size'] > $FILE_MAX_SIZE)
+        {
+            $uploadOk = 0;
+            $ret_code = 10;
+        }
+
+        if($uploadOk==1)
+        {
+            //sprawdzenie rzeczywistego typu pliku
+            global $accepted_mime_content_types;
+            //$accepted_mime_content_types=["text/plain","text/javascript","text/html"];
+            $uploadOk=0;
+            $ret_code=11;
+            foreach($accepted_mime_content_types as $element)
+            {
+                echo $element."<br>";
+                echo mime_content_type($_FILES["file"]["tmp_name"]);
+                if(mime_content_type($_FILES["file"]["tmp_name"])==$element)
+                {
+                    $uploadOk=1;
+                    $ret_code=13;
+                }
+            }
+        }
+
+        if($uploadOk==1)
+        {
+            if(!unlink($target_file))
+            {
+                $ret_code=9; //error
+                echo "blad fizycznego usuwania starego pliku!";
+            }
+
+            if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file))
+                $ret_code=13; //ok
+            else
+                $ret_code=9; //error
+        }
+    }
+
+    echo $ret_code;
+    header('Location:'.$URL.'mainpage.php?page=file_properties&id_file='.$_POST["id_file"].'&alert='.$ret_code);
+    exit;
+}
+
+
+
 //usuwanie pliku
 if($_POST['delete'])
 {
@@ -111,69 +197,74 @@ if($_POST['delete'])
     }
 }
 
-//zmiana nazwy
-try
+//zmiana nazwy, itp.
+if($_POST['edit'])
 {
-    mysqli_query($DB_link,"SET autocommit=0;");
-    mysqli_query($DB_link,"SET TRANSACTION ISOLATION LEVEL SERIALIZABLE");
-    mysqli_query($DB_link,"START TRANSACTION READ WRITE");
-    //if(!mysqli_begin_transaction($DB_link))
-    //    throw new Exception("transakcja nie wystartowała!");
-
-    if(isset($_POST['file_name']) && !empty($_POST['file_name']))
+    try
     {
-        $new_file_name=mysqli_real_escape_string($DB_link,$_POST['file_name']);
+        mysqli_query($DB_link,"SET autocommit=0;");
+        mysqli_query($DB_link,"SET TRANSACTION ISOLATION LEVEL SERIALIZABLE");
+        mysqli_query($DB_link,"START TRANSACTION READ WRITE");
+        //if(!mysqli_begin_transaction($DB_link))
+        //    throw new Exception("transakcja nie wystartowała!");
 
-        $data=mysqli_query($DB_link,"SELECT name, id_user FROM files WHERE id_file='$id_file'");
-        if(mysqli_num_rows($data)!=1)
-            throw new mysqli_sql_exception("Plik o danym id nie istnieje!");
+        if(isset($_POST['file_name']) && !empty($_POST['file_name']))
+        {
+            $new_file_name=mysqli_real_escape_string($DB_link,$_POST['file_name']);
 
-        $row=mysqli_fetch_assoc($data);
-        $old_file_name=$row['name'];
-        $owner=$row['id_user'];
+            $data=mysqli_query($DB_link,"SELECT name, id_user FROM files WHERE id_file='$id_file'");
+            if(mysqli_num_rows($data)!=1)
+                throw new mysqli_sql_exception("Plik o danym id nie istnieje!");
 
-        if(!(rename("../uploaded_files/".$owner."/".$old_file_name,"../uploaded_files/".$owner."/".$new_file_name)))
-            throw new Exception("Blad podczas fizycznej zmiany nazwy pliku");
+            $row=mysqli_fetch_assoc($data);
+            $old_file_name=$row['name'];
+            $owner=$row['id_user'];
 
-        mysqli_query($DB_link,"UPDATE files SET name='$new_file_name' WHERE id_file='$id_file'");
-        $new_path="../uploaded_files/".$owner."/".$new_file_name;
-        mysqli_query($DB_link,"UPDATE files SET path='$new_path' WHERE id_file='$id_file'");
-    }
+            if(!(rename("../uploaded_files/".$owner."/".$old_file_name,"../uploaded_files/".$owner."/".$new_file_name)))
+                throw new Exception("Blad podczas fizycznej zmiany nazwy pliku");
+
+            mysqli_query($DB_link,"UPDATE files SET name='$new_file_name' WHERE id_file='$id_file'");
+            $new_path="../uploaded_files/".$owner."/".$new_file_name;
+            mysqli_query($DB_link,"UPDATE files SET path='$new_path' WHERE id_file='$id_file'");
+        }
 
 //zmiana języka
-    if(isset($_POST['lang_name']) && !empty($_POST['lang_name']))
-    {
-        $lang_name=mysqli_real_escape_string($DB_link,$_POST['lang_name']);
+        if(isset($_POST['lang_name']) && !empty($_POST['lang_name']))
+        {
+            $lang_name=mysqli_real_escape_string($DB_link,$_POST['lang_name']);
 
-        $data=mysqli_query($DB_link,"SELECT id_lang FROM languages WHERE name='$lang_name'");
-        if(mysqli_num_rows($data)!=1)
-            throw new Exception("Język o danej nazwie nie istnieje!");
+            $data=mysqli_query($DB_link,"SELECT id_lang FROM languages WHERE name='$lang_name'");
+            if(mysqli_num_rows($data)!=1)
+                throw new Exception("Język o danej nazwie nie istnieje!");
 
-        $row=mysqli_fetch_assoc($data);
-        $id_lang=$row['id_lang'];
-        mysqli_query($DB_link,"UPDATE files SET id_lang='$id_lang'");
+            $row=mysqli_fetch_assoc($data);
+            $id_lang=$row['id_lang'];
+            mysqli_query($DB_link,"UPDATE files SET id_lang='$id_lang'");
+        }
+
+        if($e=mysqli_error($DB_link))
+            throw new mysqli_sql_exception("Blad mysqli! ".$e);
+
+        $retcode=5;
+
+        //sleep(10);
+        mysqli_query($DB_link,"COMMIT");
     }
 
-    if($e=mysqli_error($DB_link))
-       throw new mysqli_sql_exception("Blad mysqli! ".$e);
+    catch(Exception $e)
+    {
+        $retcode=6;
+        echo $e->getMessage();
+        mysqli_query($DB_link,"ROLLBACK");
+    }
 
-    $retcode=5;
-
-    //sleep(10);
-    mysqli_query($DB_link,"COMMIT");
+    finally
+    {
+        mysqli_query($DB_link,"SET autocommit=1;");
+        header('Location:'.$URL.'mainpage.php?page=file_properties&id_file='.$_POST["id_file"].'&alert='.$retcode);
+        exit;
+    }
 }
 
-catch(Exception $e)
-{
-    $retcode=6;
-    echo $e->getMessage();
-    mysqli_query($DB_link,"ROLLBACK");
-}
 
-finally
-{
-    mysqli_query($DB_link,"SET autocommit=1;");
-    header('Location:'.$URL.'mainpage.php?page=file_properties&id_file='.$_POST["id_file"].'&alert='.$retcode);
-    exit;
-}
 ?>

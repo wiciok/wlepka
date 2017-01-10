@@ -32,6 +32,18 @@
                     case 8:
                         echo "Błąd dodawania udostępnienia!";
                         break;
+                    case 9:
+                        echo "Błąd dodawania nowej wersji pliku!";
+                        break;
+                    case 10:
+                        echo "Błąd podczas próby przesyłania pliku!"."<br>"."Plik ma zbyt duży rozmiar!";
+                        break;
+                    case 11:
+                        echo "Błąd podczas próby przesyłania pliku!"."<br>"."Plik nie jest plikiem tekstowym!";
+                        break;
+                    case 13:
+                        echo "Poprawnie przesłano nową wersję pliku!";
+                        break;
                     default:
                         echo "Niepoprawny kod komunikatu!";
                         break;
@@ -133,7 +145,7 @@
             $file_owner=$row['login'];
             ?>
 
-            <form action="backend/file_edit.php" method="POST">
+            <form action="backend/file_edit.php" method="POST" enctype="multipart/form-data">
                 <input type="text" name="id_file" value="<?php echo $id_file; ?>" style="display: none">
                 <input type="text" name="id_user" value="<?php echo $id_user; ?>" style="display: none">
                 <table>
@@ -176,7 +188,13 @@
                     <tr><td><br></td></tr>
                     <tr>
                         <td colspan="2">
-                            <input type="submit" name="edit" value="Edytuj">
+                            <input type="submit" name="edit" value="Zmień dane">
+                        </td>
+                    </tr>
+                    <tr style="display: none">
+                        <td colspan="2"> <!-- wywoływane przez inne elementy -->
+                            <input type="file" name="file" id="file_checker">
+                            <input type="submit" name="new-file" id="new-file-submit" value="Prześlij nową wersję pliku">
                         </td>
                     </tr>
                     <tr>
@@ -190,7 +208,16 @@
 
         </div>
     </div>
-    <div class="col-3-10" id="col-center">
+    <div class="col-3-10" id="col-center-left">
+        <div class="innertube">
+            <h2>Edytuj plik</h2>
+            <button onclick="document.getElementById('file_checker').value='';document.getElementById('file_checker').click()">Wybierz plik</button>
+            <br><br>
+            <button onclick="document.getElementById('new-file-submit').click()">Wyślij</button>
+
+        </div>
+    </div>
+    <div class="col-3-10" id="col-center-right">
         <div class="innertube">
             <h2>Udostępnienia</h2>
             <table id="shares_table">
@@ -245,7 +272,6 @@
 
         </div>
     </div>
-
     <div class="col-3-10" id="col-right">
         <div class="invisible-container">
             <datalist id="friends_logins_list">

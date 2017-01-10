@@ -45,7 +45,7 @@ if(isset($_FILES['file']) && !empty($_FILES['file']) && isset($_POST['lang_name'
     if($uploadOk==1)
     {
         //sprawdzenie rzeczywistego typu pliku
-        $accepted_mime_content_types=["text/plain","text/javascript","text/html"];
+        global $accepted_mime_content_types;
         $uploadOk=0;
         $ret_code=7;
         foreach($accepted_mime_content_types as $element)
