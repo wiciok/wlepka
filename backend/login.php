@@ -6,7 +6,7 @@ require_once "connect_to_db.php";
 if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password']) && !empty($_POST['password'])))
 {
     $login=mysqli_real_escape_string($DB_link,$_POST['login']);
-    $password=mysqli_real_escape_string($DB_link,$_POST['password']);
+    $password=addslashes($_POST['password']);
 
 
     $data=mysqli_query($DB_link,"SELECT * FROM error_logs WHERE login='$login'");

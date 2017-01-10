@@ -20,7 +20,7 @@ if(isset($_POST['login']) && !empty($_POST['login'] && isset($_POST['password'])
     }
 
     $salt_unique=sha1(rand(0,255));
-    $password=hash("sha256",$_POST['password'].$SALT.$salt_unique);
+    $password=hash("sha256",addslashes($_POST['password']).$SALT.$salt_unique);
 
     if(isset($_POST['name']) && !empty($_POST['name']))
         $name=mysqli_real_escape_string($DB_link,$_POST['name']);
