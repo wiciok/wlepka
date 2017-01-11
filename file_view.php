@@ -9,7 +9,6 @@
     <link rel="stylesheet" type="text/css" href="main.css">
     <link rel="stylesheet" type="text/css" href="mainpage.css">
     <link rel="stylesheet" type="text/css" href="innerpages.css">
-    <link rel="stylesheet" type="text/css" href="file_view.css">
 
 
     <style>
@@ -21,17 +20,26 @@
 
 <body>
 <?php require_once "my_header.html" ?>
-
+<div id="JSValidator">
+    <h2>
+        JavaScript jest wyłączony!<br>
+        Włącz JS aby umożliwić poprawne działanie witryny!
+    </h2>
+    <script>
+        document.getElementById("JSValidator").style.display="none"
+    </script>
+</div>
 <main>
     <div class="innertube">
         <br>
         <div style="display: inline-flex;text-align: center; width: 100%; height: 3em;">
             <button onclick="window.history.back();"><- Wróć</button>
-            <div style="width: 50%">
-                <h2 id="filename_h2"></h2>
+            <div style="width: 50%" id="h3-div">
+                <h3 id="filename_h3"></h3>
             </div>
             <button id="download-button">Pobierz</button>
         </div>
+        <br><br>
     </div>
 
     <div class="col-10-10" id="column-center">
@@ -41,7 +49,7 @@
             require_once "backend/connect_to_db.php";
             function show_file($file, $name)
             {
-                echo "<script>document.getElementById('filename_h2').innerHTML='$name'</script>";
+                echo "<script>document.getElementById('filename_h3').innerHTML='$name'</script>";
 
                 $file=substr($file,3);
                 $handle = fopen($file, "r");
@@ -147,6 +155,7 @@
                 echo "Błąd! Nie ustawione id pliku do wyświetlenia!";
             ?>
         <script>hljs.initHighlightingOnLoad();</script>
+        <link rel="stylesheet" type="text/css" href="file_view.css">
     </div>
 
     <div id="div-cookie-info">

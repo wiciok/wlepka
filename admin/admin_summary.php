@@ -87,7 +87,8 @@ require_once "../backend/connect_to_db.php";
                         <th>name</th>
                         <th>lang</th>
                         <th>timestamp</th>
-                        <th>liczba udost</th>
+                        <th>l. udost</th>
+                        <th>akcja</th>
                     </tr>
                     <?php
                     $data=mysqli_query($DB_link,"select * from vFiles");
@@ -102,6 +103,7 @@ require_once "../backend/connect_to_db.php";
                         echo "<td>".htmlspecialchars($row['langname'])."</td>";
                         echo "<td>".htmlspecialchars($row['timestmp'])."</td>";
                         echo "<td>".htmlspecialchars($row['shares_num'])."</td>";
+                        echo "<td><a href='".$URL.'mainpage.php?page=file_properties&id_file='.$row['id_file']."'>Edytuj</a></td>";
                         echo "</tr>";
                     }
                     ?>

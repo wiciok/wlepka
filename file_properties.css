@@ -19,7 +19,11 @@ button {
 tr,th,td{
     padding: 0.2em;
     margin: 0;
-    font-size: 1em;
+    font-size: 0.8em;
+}
+
+tr input[type=submit],th input[type=submit],td input[type=submit]{
+    font-size: 1.2em;
 }
 
 
@@ -37,4 +41,3 @@ tr,th,td{
 #col-right{
     min-width: 280px;
 }
-

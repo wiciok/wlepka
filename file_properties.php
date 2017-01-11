@@ -132,9 +132,14 @@
 
                 if($flag!=1)
                 {
-                    echo "Nie masz praw do tego pliku!";
-                    //header("location: mainpage.php?page=file_properties&id_file=7&alert=4");
-                    exit;
+                    //jesli user nie jest adminem
+                    $adm_d=mysqli_query($DB_link,"SELECT user_type FROM users WHERE id_user='$id_user' AND user_type='admin'");
+                    if(mysqli_num_rows($adm_d)!=1)
+                    {
+                        echo "Nie masz praw do tego pliku!";
+                        //header("location: mainpage.php?page=file_properties&id_file=7&alert=4");
+                        exit;
+                    }
                 }
             }
 
@@ -222,8 +227,8 @@
             <h2>Udostępnienia</h2>
             <table id="shares_table">
                 <tr>
-                    <th width="80%"><h3>Typ:</h3></th>
-                    <th width="20%"><h3>Użytkownik:</h3></th>
+                    <th width="70%"><h3>Typ:</h3></th>
+                    <th width="30%"><h3>Użytkownik:</h3></th>
                 </tr>
                 <?php
 
