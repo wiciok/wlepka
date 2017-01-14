@@ -29,7 +29,10 @@ if(isset($_POST['login']) && !empty($_POST['login']))
 
 if(isset($_POST['password']) && !empty($_POST['password']))
 {
-    $password=hash("sha256",$_POST['password'].$SALT);
+    $ret=mysqli_query($DB_link,"SELECT salt FROM users");
+    $row=mysqli_fetch_assoc($ret);
+    $salt_unique=$row['salt'];
+    $password=hash("sha256",addslashes($_POST['password']).$SALT.$salt_unique);
     mysqli_query($DB_link,"UPDATE users SET passw='$password' WHERE id_user=$logged_id_user");
 }
 
